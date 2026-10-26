@@ -1,6 +1,6 @@
 # Radio / RadioGroup / Checkbox / CheckboxGroup
 
-This stage adds four components using the existing Minecraft-inspired tokens and pixel typography. These are library extensions based on the shared visual language, not a claim of pixel-exact fidelity to unread Figma nodes. No new imagery or motion dependencies are used.
+This stage adds four components using the existing Minecraft-inspired tokens and pixel typography. These are library extensions based on the shared visual language, not a claim of pixel-exact fidelity to unread Figma nodes. Radio geometry is corrected against the supplied design screenshot: a 45-degree diamond, faceted center, diamond focus ring, and neutral disabled palette. No new imagery or motion dependencies are used.
 
 ## Architecture
 

@@ -235,8 +235,18 @@
   .ore-choice .ore-choice__input:is(:indeterminate, [aria-checked="mixed"]) + .ore-choice__control { background: var(--ore-face); border-color: var(--ore-shadow); box-shadow: inset var(--ore-unit) var(--ore-unit) 0 var(--ore-highlight), inset calc(var(--ore-unit) * -1) calc(var(--ore-unit) * -1) 0 var(--ore-stroke); }
   .ore-choice .ore-choice__input:checked + .ore-choice__control .ore-choice__mark { display: block; width: calc(var(--ore-unit) * 3); height: calc(var(--ore-unit) * 5); border: solid var(--ore-text); border-width: 0 var(--ore-unit) var(--ore-unit) 0; transform: translateY(calc(var(--ore-unit) * -.5)) rotate(45deg); }
   /* A clipped square retains the block-built shape while reading as a radio control. */
-  .ore-choice[data-kind="radio"] .ore-choice__control { clip-path: polygon(25% 0,75% 0,75% 8.333333%,91.666667% 8.333333%,91.666667% 25%,100% 25%,100% 75%,91.666667% 75%,91.666667% 91.666667%,75% 91.666667%,75% 100%,25% 100%,25% 91.666667%,8.333333% 91.666667%,8.333333% 75%,0 75%,0 25%,8.333333% 25%,8.333333% 8.333333%,25% 8.333333%); }
-  .ore-choice[data-kind="radio"] .ore-choice__input:checked + .ore-choice__control .ore-choice__mark { width: calc(var(--ore-unit) * 4); height: calc(var(--ore-unit) * 4); border: 0; background: var(--ore-text); transform: none; }
+  /* A fixed layout box contains the rotated face, so labels and hit targets stay upright. */
+  .ore-choice[data-kind="radio"] .ore-choice__input + .ore-choice__control { background: none; border: 0; box-shadow: none; }
+  .ore-choice[data-kind="radio"] .ore-choice__control::before { content: ""; position: absolute; box-sizing: border-box; width: calc(var(--ore-unit) * 8); height: calc(var(--ore-unit) * 8); transform: rotate(45deg); background: var(--ore-face); border: calc(var(--ore-unit) * .5) solid var(--ore-frame); box-shadow: inset var(--ore-unit) var(--ore-unit) 0 var(--ore-stroke), inset calc(var(--ore-unit) * -1) calc(var(--ore-unit) * -1) 0 var(--ore-shadow); }
+  .ore-choice[data-kind="radio"] .ore-choice__input:checked + .ore-choice__control .ore-choice__mark { position: relative; width: calc(var(--ore-unit) * 4.25); height: calc(var(--ore-unit) * 4.25); border: 0; background: conic-gradient(from 0deg, #e6e8eb 0deg 90deg, #c7cbd0 90deg 180deg, #e6e8eb 180deg 270deg, #fff 270deg); transform: rotate(45deg); }
+  .ore-choice[data-kind="radio"]:is([data-variant="general"], [data-variant="warning"]) .ore-choice__mark { filter: brightness(.2); }
+  .ore-choice[data-kind="radio"]:has(.ore-choice__input:focus-visible) { outline: none; }
+  .ore-choice[data-kind="radio"] .ore-choice__input:focus-visible + .ore-choice__control::before { outline: var(--ore-unit) solid var(--ore-focus); outline-offset: var(--ore-unit); }
+  .ore-choice[data-kind="radio"][data-invalid] .ore-choice__control::before { outline: var(--ore-unit) solid var(--ore-destructive-background); outline-offset: var(--ore-unit); }
+  .ore-choice[data-kind="radio"][data-invalid] .ore-choice__control { outline: none; }
+  .ore-choice[data-kind="radio"]:has(.ore-choice__input:disabled) { --ore-face: #8c8d90; --ore-stroke: #b1b2b5; --ore-shadow: #59595b; opacity: 1; }
+  .ore-choice[data-kind="radio"] .ore-choice__input:disabled + .ore-choice__control .ore-choice__mark { filter: grayscale(1) brightness(.65); }
+  .ore-choice[data-kind="radio"]:has(.ore-choice__input:disabled) .ore-choice__copy { opacity: .45; }
   .ore-choice .ore-choice__input:is(:indeterminate, [aria-checked="mixed"]) + .ore-choice__control .ore-choice__mark { display: block; width: calc(var(--ore-unit) * 6); height: var(--ore-unit); border: 0; background: var(--ore-text); transform: none; }
   .ore-choice:has(.ore-choice__input:focus-visible) { outline: var(--ore-unit) solid var(--ore-focus); outline-offset: 3px; }
   .ore-choice[data-invalid] .ore-choice__control { outline: var(--ore-unit) solid var(--ore-destructive-background); outline-offset: 1px; }
@@ -246,10 +256,10 @@
   .ore-choice-group .ore-choice-group__description { opacity: .65; font-size: .8em; margin: 0 0 calc(var(--ore-unit) * 5); line-height: 1.7; }
   .ore-choice-group .ore-choice-group__items { display: flex; flex-direction: column; align-items: flex-start; gap: calc(var(--ore-unit) * 4); }
   .ore-choice-group[data-orientation="horizontal"] .ore-choice-group__items { flex-direction: row; flex-wrap: wrap; gap: calc(var(--ore-unit) * 10); }
-  @media (hover: hover) and (pointer: fine) { .ore-choice:hover .ore-choice__input:not(:disabled) + .ore-choice__control { outline: var(--ore-unit) solid var(--ore-stroke); outline-offset: 1px; } }
+  @media (hover: hover) and (pointer: fine) { .ore-choice[data-kind="radio"]:hover .ore-choice__input:not(:disabled) + .ore-choice__control { outline: none; } .ore-choice[data-kind="radio"]:hover .ore-choice__input:not(:disabled) + .ore-choice__control::before { background: var(--ore-hover); } .ore-choice:not([data-kind="radio"]):hover .ore-choice__input:not(:disabled) + .ore-choice__control { outline: var(--ore-unit) solid var(--ore-stroke); outline-offset: 1px; } }
   @media (forced-colors: active) {
     .ore-choice .ore-choice__input { position: static; opacity: 1; width: auto; height: auto; appearance: auto; }
     .ore-choice .ore-choice__control { display: none; }
-    .ore-choice:has(.ore-choice__input:focus-visible) { outline-color: Highlight; }
+    .ore-choice:has(.ore-choice__input:focus-visible) { outline: var(--ore-unit) solid Highlight; }
   }
 }

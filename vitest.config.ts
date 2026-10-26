@@ -3,5 +3,5 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 export default defineConfig({
   plugins: [svelte({ configFile: './packages/svelte/svelte.config.js' })],
   resolve: { conditions: ['browser'] },
-  test: { environment: 'jsdom', include: ['tests/**/*.test.{ts,tsx}'], setupFiles: ['./tests/setup.ts'] },
+  test: { server: { deps: { inline: ['@zag-js/svelte'] } }, environment: 'jsdom', include: ['tests/**/*.test.{ts,tsx}'], setupFiles: ['./tests/setup.ts'] },
 });

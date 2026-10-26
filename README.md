@@ -54,7 +54,7 @@ React 18 / 19。支持原生 button 属性、事件和 forwardRef；`type` 默�
 </Button>
 ```
 
-支持 Svelte 5 snippet children、原生事件、class 字符串/数组/对象，以及 `bind:ref`。两个适配器共享 `variant`、`size`、`loading`、`disabled`、`fullWidth`、`unstyled` API。
+支持 Svelte 5.20+ snippet children、原生事件、class 字符串/数组/对象，以及 `bind:ref`。两个适配器共享 `variant`、`size`、`loading`、`disabled`、`fullWidth`、`unstyled` API。
 
 ## 样式与 Figma 接入
 
@@ -118,3 +118,28 @@ pnpm add /absolute/path/to/artifacts/ore-ui-react-0.1.0.tgz
 - 可选 `import '@ore-ui/react/fonts.css'`（或 Svelte 对应路径）注册 Minecraft Seven v2。也可提供自己的 `--ore-font`。
 - Loading 方块与缩放档位是库的扩展，未声称来自 Figma 原稿。当前实现横向文字与任意 children 图标；纵向内容布局尚未实现。
 - 设计稿与字体的来源、署名及发布前字体权限检查见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
+
+## Select 单选下拉
+
+两端共用 Zag Select 状态机和 CSS；只在适配器中处理 React / Svelte 的渲染与生命周期。Select 默认 `variant="general"`，支持 Button 的五种配色和尺寸。
+
+```tsx
+import { Select } from '@ore-ui/react';
+import '@ore-ui/react/styles.css';
+import '@ore-ui/react/fonts.css'; // 可选字体
+
+const options = [
+  { value: 'survival', label: 'Survival' },
+  { value: 'creative', label: 'Creative' },
+  { value: 'spectator', label: 'Spectator', disabled: true },
+];
+
+<Select label="Game mode" options={options} name="mode"
+  defaultValue="survival" onValueChange={value => console.log(value)} />
+```
+
+Svelte 的导入路径为 `@ore-ui/svelte`，可用 `<Select {options} label="Game mode" bind:value />`。React 的受控写法为 `value={value} onValueChange={setValue}`。回调参数和绑定值均为单个字符串；空字符串表示清空，option 的 value 必须唯一且非空。
+
+包含键盘方向键、Home/End、typeahead、Enter、Escape、禁用选项、表单提交/重置、可见 label、`aria-label` / `aria-describedby`、required/invalid、ref、portal 定位与视口避让。演示页从左侧 Select 入口访问，也可直接打开 `/#select`。
+
+下拉样式沿用已经确认的 MC tokens；本阶段 Figma 配额未恢复，尚未与 Select 源稿逐像素对照。设计及 API 范围见 [Select 说明](./docs/select-design.md)。

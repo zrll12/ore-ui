@@ -78,7 +78,7 @@
     font-weight: 400; line-height: normal; text-align: center; text-decoration: none;
     cursor: pointer; -webkit-tap-highlight-color: transparent;
   }
-  .ore-button[data-variant="general"] {
+  .ore-button[data-variant="general"], .ore-select[data-variant="general"], .ore-select__positioner[data-variant="general"] {
     --ore-face: var(--ore-general-background);
     --ore-hover: var(--ore-general-hover);
     --ore-pressed: var(--ore-general-pressed);
@@ -89,7 +89,7 @@
     --ore-shadow: var(--ore-general-shadow);
     --ore-text: var(--ore-general-text);
   }
-  .ore-button[data-variant="destructive"] {
+  .ore-button[data-variant="destructive"], .ore-select[data-variant="destructive"], .ore-select__positioner[data-variant="destructive"] {
     --ore-face: var(--ore-destructive-background);
     --ore-hover: var(--ore-destructive-hover);
     --ore-pressed: var(--ore-destructive-pressed);
@@ -100,7 +100,7 @@
     --ore-shadow: var(--ore-destructive-shadow);
     --ore-text: var(--ore-destructive-text);
   }
-  .ore-button[data-variant="warning"] {
+  .ore-button[data-variant="warning"], .ore-select[data-variant="warning"], .ore-select__positioner[data-variant="warning"] {
     --ore-face: var(--ore-warning-background);
     --ore-hover: var(--ore-warning-hover);
     --ore-pressed: var(--ore-warning-pressed);
@@ -111,7 +111,7 @@
     --ore-shadow: var(--ore-warning-shadow);
     --ore-text: var(--ore-warning-text);
   }
-  .ore-button[data-variant="realms"] {
+  .ore-button[data-variant="realms"], .ore-select[data-variant="realms"], .ore-select__positioner[data-variant="realms"] {
     --ore-face: var(--ore-realms-background);
     --ore-hover: var(--ore-realms-hover);
     --ore-pressed: var(--ore-realms-pressed);
@@ -122,11 +122,13 @@
     --ore-shadow: var(--ore-realms-shadow);
     --ore-text: var(--ore-realms-text);
   }
+  .ore-select, .ore-select__positioner { --ore-unit: 2px; }
+  .ore-select[data-variant="colored"], .ore-select__positioner[data-variant="colored"] { --ore-face: var(--ore-colored-background); --ore-hover: var(--ore-colored-hover); --ore-text: var(--ore-colored-text); --ore-stroke: var(--ore-colored-stroke); }
   .ore-button *, .ore-button *::before, .ore-button *::after { box-sizing: border-box; }
-  .ore-button[data-size="xs"] { --ore-unit: 1px; --ore-button-padding: 12px; }
-  .ore-button[data-size="sm"] { --ore-unit: 1.5px; --ore-button-padding: 18px; }
-  .ore-button[data-size="lg"] { --ore-unit: 3px; --ore-button-padding: 36px; }
-  .ore-button[data-size="xl"] { --ore-unit: 4px; --ore-button-padding: 48px; }
+  .ore-button[data-size="xs"], .ore-select[data-size="xs"], .ore-select__positioner[data-size="xs"] { --ore-unit: 1px; --ore-button-padding: 12px; }
+  .ore-button[data-size="sm"], .ore-select[data-size="sm"], .ore-select__positioner[data-size="sm"] { --ore-unit: 1.5px; --ore-button-padding: 18px; }
+  .ore-button[data-size="lg"], .ore-select[data-size="lg"], .ore-select__positioner[data-size="lg"] { --ore-unit: 3px; --ore-button-padding: 36px; }
+  .ore-button[data-size="xl"], .ore-select[data-size="xl"], .ore-select__positioner[data-size="xl"] { --ore-unit: 4px; --ore-button-padding: 48px; }
   .ore-button[data-full-width] { width: 100%; }
   .ore-button .ore-button__surface {
     display: flex; flex: 1; min-width: 0; height: var(--ore-surface-height);
@@ -179,5 +181,42 @@
     .ore-button { outline: 1px solid ButtonText; }
     .ore-button:focus-visible { outline: 3px solid Highlight; }
     .ore-button:disabled { color: GrayText; }
+  }
+}
+@layer ore.components {
+
+  .ore-select, .ore-select *, .ore-select__positioner, .ore-select__positioner * { box-sizing: border-box; }
+  .ore-select { display: inline-block; vertical-align: top; width: 280px; max-width: 100%; font-family: var(--ore-font); }
+  .ore-select[data-full-width] { display: block; width: 100%; }
+  .ore-select .ore-select__label { display: block; color: inherit; font-size: calc(var(--ore-unit) * 7); line-height: 1.5; margin-bottom: calc(var(--ore-unit) * 4); }
+  .ore-select .ore-select__trigger { width: 100%; }
+  .ore-select .ore-select__trigger .ore-button__label { width: 100%; justify-content: space-between; }
+  .ore-select .ore-select__trigger .ore-button__content { padding-inline: calc(var(--ore-unit) * 6); }
+  .ore-select .ore-select__value { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: start; }
+  .ore-select .ore-select__value[data-placeholder] { opacity: .65; }
+  .ore-select .ore-select__indicator { flex-shrink: 0; font-size: calc(var(--ore-unit) * 9); line-height: 1; }
+  .ore-select[data-invalid] .ore-select__trigger { outline: var(--ore-unit) solid var(--ore-destructive-background); outline-offset: 2px; }
+  .ore-select__positioner { z-index: 1000; font-family: var(--ore-font); }
+  .ore-select__positioner .ore-select__content {
+    width: 100%; max-height: min(300px, var(--available-height, 300px)); overflow-y: auto; overscroll-behavior: contain;
+    margin: 0; padding: var(--ore-unit); border: var(--ore-unit) solid var(--ore-frame);
+    outline: 1px solid #59595b; outline-offset: -1px; background: #262628; color: #fff;
+    box-shadow: 0 calc(var(--ore-unit) * 3) 0 #0005; font-size: calc(var(--ore-unit) * 8); line-height: 1.4;
+  }
+  .ore-select__positioner .ore-select__item {
+    display: flex; justify-content: space-between; align-items: center; gap: calc(var(--ore-unit) * 6);
+    min-height: calc(var(--ore-unit) * 20); padding: calc(var(--ore-unit) * 4) calc(var(--ore-unit) * 6);
+    cursor: pointer; user-select: none; border: var(--ore-unit) solid transparent;
+  }
+  .ore-select__positioner .ore-select__item[data-state="checked"] { background: #303d2c; border-color: #50913d; }
+  .ore-select__positioner .ore-select__item[data-highlighted] { background: var(--ore-hover); color: var(--ore-text); border-color: var(--ore-stroke); }
+  .ore-select__positioner .ore-select__item[data-disabled] { opacity: .4; cursor: not-allowed; }
+  .ore-select__positioner .ore-select__check { color: inherit; }
+  .ore-select__positioner .ore-select__check[hidden] { display: none; }
+  .ore-select__positioner .ore-select__empty { padding: 12px; opacity: .6; }
+  @media (forced-colors: active) {
+    .ore-select__positioner .ore-select__content { border-color: CanvasText; }
+    .ore-select__positioner .ore-select__item[data-highlighted] { outline: 2px solid Highlight; }
+    .ore-select__positioner .ore-select__item[data-disabled] { color: GrayText; }
   }
 }

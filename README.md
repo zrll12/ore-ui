@@ -1,6 +1,6 @@
 # Ore UI
 
-React / Svelte 双入口 UI 组件库。样式、设计 tokens、组件配置和 DOM 动画共享，框架层只负责渲染、事件和 refs。演示站使用 React + Vite，参考 Mantine 的参数面板与实时示例代码布局。
+Minecraft Ore UI 风格的 React / Svelte 双入口 UI 组件库。样式、设计 tokens、组件配置和 DOM 动画共享，框架层只负责渲染、事件和 refs。演示站使用 React + Vite，参考 Mantine 的参数面板与实时示例代码布局。
 
 ## 开发
 
@@ -34,7 +34,7 @@ tests/             React / Svelte 行为与 reduced-motion 测试
 import { Button } from '@ore-ui/react';
 import '@ore-ui/react/styles.css';
 
-<Button variant="filled" color="violet" size="md" radius="md">
+<Button variant="colored" size="md">
   Get started
 </Button>
 ```
@@ -49,12 +49,12 @@ React 18 / 19。支持原生 button 属性、事件和 forwardRef；`type` 默�
   import '@ore-ui/svelte/styles.css';
 </script>
 
-<Button variant="filled" color="violet" onclick={() => console.log('clicked')}>
+<Button variant="colored" onclick={() => console.log('clicked')}>
   Get started
 </Button>
 ```
 
-支持 Svelte 5 snippet children、原生事件、class 字符串/数组/对象，以及 `bind:ref`。两个适配器共享 `variant`、`color`、`size`、`radius`、`loading`、`disabled`、`fullWidth`、`unstyled` API。
+支持 Svelte 5 snippet children、原生事件、class 字符串/数组/对象，以及 `bind:ref`。两个适配器共享 `variant`、`size`、`loading`、`disabled`、`fullWidth`、`unstyled` API。
 
 ## 样式与 Figma 接入
 
@@ -63,22 +63,22 @@ React 18 / 19。支持原生 button 属性、事件和 forwardRef；`type` 默�
 ```css
 /* 应用样式，位于库样式之后 */
 :root {
-  --ore-violet: #6241cf;
-  --ore-violet-soft: #f0ebff;
-  --ore-violet-ink: #6241cf;
+  --ore-colored-background: #387e24;
+  --ore-colored-hover: #275b1a;
+  --ore-colored-pressed: #1c4a12;
   --ore-font: 'Your font', sans-serif;
 }
 .checkout-button {
-  --ore-button-height: 44px;
-  --ore-button-radius: 12px;
+  --ore-unit: 2px;
+  --ore-button-padding: 24px;
 }
 ```
 
-后续 Figma 的颜色、字体、尺寸和圆角映射到 `packages/core/src/styles.css`；状态与 variant 规则也在此处更新，React / Svelte 无需各写一份。React 使用 `className`，Svelte 使用 `class`。
+后续 Figma 的颜色、字体、边框和立体深度映射到 `packages/core/src/styles.css`；状态与 variant 规则也在此处更新，React / Svelte 无需各写一份。React 使用 `className`，Svelte 使用 `class`。
 
 ## 动画策略
 
-- 普通按钮按压：CSS `transform: scale(.97)`，160ms，`cubic-bezier(.23,1,.32,1)`，反馈轻且可中断。键盘 focus 不触发按压位移。
+- 普通按钮按压：外层点击区域固定，内层表面下沉 3 个像素单位，立体底边消失。指针交互使用 160ms transform transition；键盘按下立即切换状态，reduced-motion 下不移动。此时长是实现选择，设计文件没有提供关键帧轨道。
 - 弹簧 / 非线性位移：使用 Motion 的框架无关 `animate` API；独立 `./motion` 子入口，普通 Button 不引入动画运行时代码。
 - 位移应用于外层 wrapper，按钮按压作用于内层，避免争用 `transform`。
 - `springTo` 支持反复改变目标、取消与卸载清理。reduced-motion 下保持静止。模块可在 SSR 中导入；调用需要已挂载的 DOM。
@@ -107,3 +107,14 @@ pnpm add /absolute/path/to/artifacts/ore-ui-react-0.1.0.tgz
 ```
 
 产物含 JS、类型声明和显式 `styles.css` 导出。Svelte 额外保留可编译的 `.svelte` 文件与 `svelte` export condition。开发工具、演示站和共享私有包均不发布。两种样式内容相同，在同时使用两个库的应用中只导入其中一份样式。
+
+## Minecraft Button 设计对照
+
+来源：[Button 组件集](https://www.figma.com/design/XAEZlcgBRTwyL5EvAVWdV3/?node-id=425-8428)。
+
+- `variant` 改为 `colored | general | destructive | warning | realms`；移除 init 阶段占位的 `color` / `radius` 和四种通用变体。此时尚未发布 npm，因此直接统一为设计稿语义。
+- `xs / sm / md / lg / xl` 为源组件 25% / 37.5% / 50% / 75% / 100% 比例；`xl` 对应 105px 外框、89px 表面、36px 字体、4px 描边、8px 底边，按下表面下沉 12px。宽度按内容自适应，可通过原生 `style` / `className` / `class` 控制，`fullWidth` 填满父容器。
+- Figma 的 default / hovered / focused / pressed / disabled 映射到原生 CSS 状态；组合状态自然叠加。静态状态展示仅存在演示站，库没有允许伪造交互状态的公共 prop。
+- 可选 `import '@ore-ui/react/fonts.css'`（或 Svelte 对应路径）注册 Minecraft Seven v2。也可提供自己的 `--ore-font`。
+- Loading 方块与缩放档位是库的扩展，未声称来自 Figma 原稿。当前实现横向文字与任意 children 图标；纵向内容布局尚未实现。
+- 设计稿与字体的来源、署名及发布前字体权限检查见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。

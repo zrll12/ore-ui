@@ -1,12 +1,44 @@
 {
-  "name":"@ore-ui/svelte", "version":"0.1.0", "type":"module", "files":["dist"],
-  "sideEffects":["**/*.css"], "publishConfig":{"access":"public"},
-  "exports": {
-    ".":{"types":"./dist/index.d.ts","svelte":"./dist/index.js","default":"./dist/index.js"},
-    "./motion":{"types":"./dist/motion.d.ts","import":"./dist/motion.js"},
-    "./styles.css":"./dist/styles.css"
+  "name": "@ore-ui/svelte",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
-  "scripts":{"build":"node ../../scripts/prepare-svelte.mjs && svelte-package -i .package-input -o dist && node ../../scripts/copy-styles.mjs svelte","check":"svelte-check --tsconfig ./tsconfig.json"},
-  "peerDependencies":{"svelte":"^5.0.0"}, "dependencies":{"motion":"^12.23.24"},
-  "devDependencies":{"@ore-ui/core":"workspace:*","svelte":"^5.43.0","@sveltejs/package":"^2.5.4","svelte-check":"^4.3.3"}
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./motion": {
+      "types": "./dist/motion.d.ts",
+      "import": "./dist/motion.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./fonts.css": "./dist/fonts.css"
+  },
+  "scripts": {
+    "build": "node ../../scripts/prepare-svelte.mjs && svelte-package -i .package-input -o dist && node ../../scripts/copy-styles.mjs svelte",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "dependencies": {
+    "motion": "^12.23.24"
+  },
+  "devDependencies": {
+    "@ore-ui/core": "workspace:*",
+    "svelte": "^5.43.0",
+    "@sveltejs/package": "^2.5.4",
+    "svelte-check": "^4.3.3"
+  }
 }

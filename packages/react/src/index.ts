@@ -1,2 +1,2 @@
 export { Button, type ButtonProps } from './Button';
-export { buttonVariants, buttonSizes, buttonColors, buttonRadii, type ButtonOptions } from '../../core/src/index.js';
+export { buttonVariants, buttonSizes, type ButtonOptions } from '../../core/src/index.js';

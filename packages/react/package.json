@@ -1,13 +1,41 @@
 {
-  "name":"@ore-ui/react", "version":"0.1.0", "type":"module", "files":["dist"],
-  "sideEffects":["**/*.css"], "publishConfig":{"access":"public"},
-  "exports": {
-    ".":{"types":"./dist/index.d.ts","import":"./dist/index.js"},
-    "./motion":{"types":"./dist/motion.d.ts","import":"./dist/motion.js"},
-    "./styles.css":"./dist/styles.css"
+  "name": "@ore-ui/react",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
-  "scripts":{"build":"tsup && node ../../scripts/copy-styles.mjs react","check":"tsc -p tsconfig.json"},
-  "peerDependencies":{"react":"^18.2.0 || ^19.0.0"},
-  "dependencies":{"motion":"^12.23.24"},
-  "devDependencies":{"@ore-ui/core":"workspace:*","react":"^19.2.0"}
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./motion": {
+      "types": "./dist/motion.d.ts",
+      "import": "./dist/motion.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./fonts.css": "./dist/fonts.css"
+  },
+  "scripts": {
+    "build": "tsup && node ../../scripts/copy-styles.mjs react",
+    "check": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "motion": "^12.23.24"
+  },
+  "devDependencies": {
+    "@ore-ui/core": "workspace:*",
+    "react": "^19.2.0"
+  }
 }

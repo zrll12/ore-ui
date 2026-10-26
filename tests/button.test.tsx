@@ -6,10 +6,10 @@ afterEach(cleanup);
 describe('React Button adapter', () => {
   it('forwards events, native attributes, and ref while preventing implicit form submission', () => {
     const onClick = vi.fn(); const ref = createRef<HTMLButtonElement>();
-    const { getByRole } = render(<Button ref={ref} onClick={onClick} name="action" variant="outline">Continue</Button>);
+    const { getByRole } = render(<Button ref={ref} onClick={onClick} name="action" variant="general">Continue</Button>);
     const button = getByRole('button', { name: 'Continue' });
     expect(ref.current).toBe(button); expect(button).toHaveAttribute('type', 'button');
-    expect(button).toHaveAttribute('name', 'action'); expect(button).toHaveAttribute('data-variant', 'outline');
+    expect(button).toHaveAttribute('name', 'action'); expect(button).toHaveAttribute('data-variant', 'general');
     fireEvent.click(button); expect(onClick).toHaveBeenCalledOnce();
   });
   it('preserves the accessible label and blocks clicks while loading', () => {

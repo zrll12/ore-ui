@@ -1,61 +1,173 @@
 @layer ore.tokens, ore.components;
 @layer ore.tokens {
   :root {
-    --ore-font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --ore-font: "Minecraft Seven", monospace;
     --ore-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --ore-press-duration: 160ms;
-    --ore-violet: #7152df; --ore-violet-soft: #f0ebff; --ore-violet-ink: #6241cf;
-    --ore-blue: #2563eb; --ore-blue-soft: #eaf1ff; --ore-blue-ink: #1d50c5;
-    --ore-teal: #087f70; --ore-teal-soft: #e6f6f1; --ore-teal-ink: #087467;
-    --ore-rose: #c73c63; --ore-rose-soft: #fceaf0; --ore-rose-ink: #b62e54;
-    --ore-amber: #a45b08; --ore-amber-soft: #fff3dc; --ore-amber-ink: #8b4e08;
-    --ore-slate: #475569; --ore-slate-soft: #edf0f5; --ore-slate-ink: #334155;
+    --ore-frame: #1e1e1f;
+    --ore-focus: #fff;
+    --ore-colored-background: #387e24;
+    --ore-colored-hover: #275b1a;
+    --ore-colored-pressed: #1c4a12;
+    --ore-colored-stroke: #50913d;
+    --ore-colored-stroke-hover: #6b935f;
+    --ore-colored-highlight: #ffffff33;
+    --ore-colored-highlight-hover: #ffffff66;
+    --ore-colored-shadow: #1d4d13;
+    --ore-colored-text: #fff;
+    --ore-general-background: #d0d1d5;
+    --ore-general-hover: #b1b2b6;
+    --ore-general-pressed: #b1b2b6;
+    --ore-general-stroke: #e3e3e5;
+    --ore-general-stroke-hover: #e3e3e5;
+    --ore-general-highlight: #ffffff33;
+    --ore-general-highlight-hover: #ffffff33;
+    --ore-general-shadow: #59595b;
+    --ore-general-text: #1e1e20;
+    --ore-destructive-background: #c93636;
+    --ore-destructive-hover: #c02d2d;
+    --ore-destructive-pressed: #ad1d1d;
+    --ore-destructive-stroke: #d04a4b;
+    --ore-destructive-stroke-hover: #d98180;
+    --ore-destructive-highlight: #ffffff33;
+    --ore-destructive-highlight-hover: #ffffff66;
+    --ore-destructive-shadow: #ad1d1d;
+    --ore-destructive-text: #fff;
+    --ore-warning-background: #e1b922;
+    --ore-warning-hover: #c09a0d;
+    --ore-warning-pressed: #c09a0d;
+    --ore-warning-stroke: #e7c85b;
+    --ore-warning-stroke-hover: #e7c85b;
+    --ore-warning-highlight: #ffffff33;
+    --ore-warning-highlight-hover: #ffffff33;
+    --ore-warning-shadow: #b87919;
+    --ore-warning-text: #1e1e20;
+    --ore-realms-background: #7345e5;
+    --ore-realms-hover: #5d2cc6;
+    --ore-realms-pressed: #4a1cac;
+    --ore-realms-stroke: #8e4aeb;
+    --ore-realms-stroke-hover: #9242e2;
+    --ore-realms-highlight: #fab0ff33;
+    --ore-realms-highlight-hover: #fab0ff66;
+    --ore-realms-shadow: #4a1cac;
+    --ore-realms-text: #fff;
   }
 }
 @layer ore.components {
   .ore-button {
-    --ore-accent: var(--ore-violet); --ore-soft: var(--ore-violet-soft); --ore-ink: var(--ore-violet-ink);
-    --ore-button-height: 40px; --ore-button-padding: 18px; --ore-button-font-size: 14px; --ore-button-radius: 8px;
-    appearance: none; box-sizing: border-box; position: relative; display: inline-flex; align-items: center; justify-content: center;
-    gap: 9px; min-width: var(--ore-button-height); height: var(--ore-button-height); padding: 0 var(--ore-button-padding);
-    border: 1px solid transparent; border-radius: var(--ore-button-radius); font-family: var(--ore-font);
-    font-size: var(--ore-button-font-size); font-weight: 550; line-height: 1; white-space: nowrap;
-    cursor: pointer; vertical-align: middle; text-decoration: none; -webkit-tap-highlight-color: transparent;
-    background: var(--ore-accent); color: white;
-    transition: transform var(--ore-press-duration) var(--ore-ease-out), background-color 160ms ease, opacity 160ms ease;
+    --ore-unit: 2px;
+    --ore-button-padding: 24px;
+    --ore-face: var(--ore-colored-background);
+    --ore-hover: var(--ore-colored-hover);
+    --ore-pressed: var(--ore-colored-pressed);
+    --ore-stroke: var(--ore-colored-stroke);
+    --ore-stroke-hover: var(--ore-colored-stroke-hover);
+    --ore-highlight: var(--ore-colored-highlight);
+    --ore-highlight-hover: var(--ore-colored-highlight-hover);
+    --ore-shadow: var(--ore-colored-shadow);
+    --ore-text: var(--ore-colored-text);
+    appearance: none; box-sizing: border-box; position: relative; display: inline-flex;
+    align-items: flex-start; justify-content: center; vertical-align: middle;
+    height: calc(var(--ore-unit) * 26.25); min-width: calc(var(--ore-unit) * 40);
+    max-width: 100%; padding: var(--ore-unit) var(--ore-unit) calc(var(--ore-unit) * 3);
+    margin: 0; border: 0; border-radius: 0;
+    background: var(--ore-frame); color: var(--ore-text);
+    font-family: var(--ore-font); font-size: calc(var(--ore-unit) * 9);
+    font-weight: 400; line-height: normal; text-align: center; text-decoration: none;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
   }
-  .ore-button[data-color="blue"] { --ore-accent: var(--ore-blue); --ore-soft: var(--ore-blue-soft); --ore-ink: var(--ore-blue-ink); }
-  .ore-button[data-color="teal"] { --ore-accent: var(--ore-teal); --ore-soft: var(--ore-teal-soft); --ore-ink: var(--ore-teal-ink); }
-  .ore-button[data-color="rose"] { --ore-accent: var(--ore-rose); --ore-soft: var(--ore-rose-soft); --ore-ink: var(--ore-rose-ink); }
-  .ore-button[data-color="amber"] { --ore-accent: var(--ore-amber); --ore-soft: var(--ore-amber-soft); --ore-ink: var(--ore-amber-ink); }
-  .ore-button[data-color="slate"] { --ore-accent: var(--ore-slate); --ore-soft: var(--ore-slate-soft); --ore-ink: var(--ore-slate-ink); }
-  .ore-button[data-variant="light"] { background: var(--ore-soft); color: var(--ore-ink); }
-  .ore-button[data-variant="outline"] { background: transparent; border-color: var(--ore-accent); color: var(--ore-ink); }
-  .ore-button[data-variant="subtle"] { background: transparent; color: var(--ore-ink); }
-  .ore-button[data-size="xs"] { --ore-button-height: 28px; --ore-button-padding: 10px; --ore-button-font-size: 11px; }
-  .ore-button[data-size="sm"] { --ore-button-height: 34px; --ore-button-padding: 14px; --ore-button-font-size: 12px; }
-  .ore-button[data-size="lg"] { --ore-button-height: 46px; --ore-button-padding: 22px; --ore-button-font-size: 15px; }
-  .ore-button[data-size="xl"] { --ore-button-height: 54px; --ore-button-padding: 28px; --ore-button-font-size: 16px; }
-  .ore-button[data-radius="none"] { --ore-button-radius: 0px; }
-  .ore-button[data-radius="sm"] { --ore-button-radius: 4px; }
-  .ore-button[data-radius="lg"] { --ore-button-radius: 14px; }
-  .ore-button[data-radius="full"] { --ore-button-radius: 999px; }
+  .ore-button[data-variant="general"] {
+    --ore-face: var(--ore-general-background);
+    --ore-hover: var(--ore-general-hover);
+    --ore-pressed: var(--ore-general-pressed);
+    --ore-stroke: var(--ore-general-stroke);
+    --ore-stroke-hover: var(--ore-general-stroke-hover);
+    --ore-highlight: var(--ore-general-highlight);
+    --ore-highlight-hover: var(--ore-general-highlight-hover);
+    --ore-shadow: var(--ore-general-shadow);
+    --ore-text: var(--ore-general-text);
+  }
+  .ore-button[data-variant="destructive"] {
+    --ore-face: var(--ore-destructive-background);
+    --ore-hover: var(--ore-destructive-hover);
+    --ore-pressed: var(--ore-destructive-pressed);
+    --ore-stroke: var(--ore-destructive-stroke);
+    --ore-stroke-hover: var(--ore-destructive-stroke-hover);
+    --ore-highlight: var(--ore-destructive-highlight);
+    --ore-highlight-hover: var(--ore-destructive-highlight-hover);
+    --ore-shadow: var(--ore-destructive-shadow);
+    --ore-text: var(--ore-destructive-text);
+  }
+  .ore-button[data-variant="warning"] {
+    --ore-face: var(--ore-warning-background);
+    --ore-hover: var(--ore-warning-hover);
+    --ore-pressed: var(--ore-warning-pressed);
+    --ore-stroke: var(--ore-warning-stroke);
+    --ore-stroke-hover: var(--ore-warning-stroke-hover);
+    --ore-highlight: var(--ore-warning-highlight);
+    --ore-highlight-hover: var(--ore-warning-highlight-hover);
+    --ore-shadow: var(--ore-warning-shadow);
+    --ore-text: var(--ore-warning-text);
+  }
+  .ore-button[data-variant="realms"] {
+    --ore-face: var(--ore-realms-background);
+    --ore-hover: var(--ore-realms-hover);
+    --ore-pressed: var(--ore-realms-pressed);
+    --ore-stroke: var(--ore-realms-stroke);
+    --ore-stroke-hover: var(--ore-realms-stroke-hover);
+    --ore-highlight: var(--ore-realms-highlight);
+    --ore-highlight-hover: var(--ore-realms-highlight-hover);
+    --ore-shadow: var(--ore-realms-shadow);
+    --ore-text: var(--ore-realms-text);
+  }
+  .ore-button *, .ore-button *::before, .ore-button *::after { box-sizing: border-box; }
+  .ore-button[data-size="xs"] { --ore-unit: 1px; --ore-button-padding: 12px; }
+  .ore-button[data-size="sm"] { --ore-unit: 1.5px; --ore-button-padding: 18px; }
+  .ore-button[data-size="lg"] { --ore-unit: 3px; --ore-button-padding: 36px; }
+  .ore-button[data-size="xl"] { --ore-unit: 4px; --ore-button-padding: 48px; }
   .ore-button[data-full-width] { width: 100%; }
-  .ore-button:focus-visible { outline: 3px solid var(--ore-accent); outline-offset: 3px; }
-  .ore-button:active:not(:disabled):not(:focus-visible) { transform: scale(0.97); }
-  .ore-button:disabled { cursor: not-allowed; opacity: 0.45; }
-  .ore-button[data-loading] { cursor: wait; opacity: 0.75; }
-  .ore-button__label { display: inline-flex; align-items: center; justify-content: center; gap: inherit; }
-  .ore-button[data-loading] .ore-button__label { opacity: 0; }
-  .ore-button__loader { position: absolute; width: 15px; height: 15px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: ore-spin 700ms linear infinite; }
-  @keyframes ore-spin { to { transform: rotate(360deg); } }
-  @media (hover: hover) and (pointer: fine) {
-    .ore-button:hover:not(:disabled) { background: color-mix(in srgb, var(--ore-accent), black 9%); }
-    .ore-button:is([data-variant="light"], [data-variant="outline"], [data-variant="subtle"]):hover:not(:disabled) { background: var(--ore-soft); }
+  .ore-button .ore-button__surface {
+    display: flex; flex: 1; min-width: 0; height: calc(var(--ore-unit) * 22.25);
+    padding: var(--ore-unit); border: solid var(--ore-stroke);
+    border-width: 0 var(--ore-unit) var(--ore-unit) 0;
+    background: var(--ore-face); box-shadow: 0 calc(var(--ore-unit) * 2) 0 var(--ore-shadow);
+    transform: translateY(0); transition: transform var(--ore-press-duration) var(--ore-ease-out);
   }
+  .ore-button .ore-button__content {
+    position: relative; display: flex; flex: 1; align-items: center; justify-content: center;
+    border: solid var(--ore-highlight); border-width: var(--ore-unit) 0 0 var(--ore-unit);
+    min-width: 0; height: 100%; padding-inline: var(--ore-button-padding);
+  }
+  .ore-button .ore-button__label { display: inline-flex; align-items: center; justify-content: center; gap: calc(var(--ore-unit) * 4); white-space: nowrap; }
+  .ore-button:focus-visible { outline: var(--ore-unit) solid var(--ore-focus); outline-offset: 0; }
+  @media (hover: hover) and (pointer: fine) {
+    .ore-button:hover:not(:disabled) { --ore-face: var(--ore-hover); }
+    .ore-button:hover:not(:disabled) .ore-button__surface { border-color: var(--ore-stroke-hover); }
+    .ore-button:hover:not(:disabled) .ore-button__content { border-color: var(--ore-highlight-hover); }
+  }
+  /* The hit target stays fixed. Only its surface travels into the reserved depth. */
+  .ore-button:active:not(:disabled) { --ore-face: var(--ore-pressed); }
+  .ore-button:active:not(:disabled) .ore-button__surface {
+    height: calc(var(--ore-unit) * 21.25); transform: translateY(calc(var(--ore-unit) * 3));
+    box-shadow: none; border-color: var(--ore-stroke-hover);
+  }
+  .ore-button:active:not(:disabled) .ore-button__content { border-color: var(--ore-highlight-hover); }
+  .ore-button:active:focus-visible .ore-button__surface { transition: none; }
+  .ore-button:disabled { --ore-face: var(--ore-hover); cursor: not-allowed; padding-bottom: var(--ore-unit); }
+  .ore-button:disabled .ore-button__surface { height: calc(var(--ore-unit) * 24.25); box-shadow: none; }
+  .ore-button:disabled .ore-button__label { opacity: 0.5; }
+  .ore-button[data-loading] { cursor: wait; }
+  .ore-button[data-loading] .ore-button__label { opacity: 0; }
+  .ore-button .ore-button__loader { position: absolute; width: calc(var(--ore-unit) * 5); height: calc(var(--ore-unit) * 5); background: currentColor; animation: ore-loading 900ms steps(2, end) infinite; }
+  @keyframes ore-loading { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) {
-    .ore-button { transition: opacity 160ms ease, background-color 160ms ease; }
-    .ore-button:active:not(:disabled):not(:focus-visible) { transform: none; }
-    .ore-button__loader { animation: none; border-style: dotted; }
+    .ore-button .ore-button__surface { transition: none; }
+    .ore-button:active:not(:disabled) .ore-button__surface { transform: none; height: calc(var(--ore-unit) * 22.25); }
+    .ore-button .ore-button__loader { animation: none; opacity: 0.65; }
+  }
+  @media (forced-colors: active) {
+    .ore-button { outline: 1px solid ButtonText; }
+    .ore-button:focus-visible { outline: 3px solid Highlight; }
+    .ore-button:disabled { color: GrayText; }
   }
 }

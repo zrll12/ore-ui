@@ -1,0 +1,8 @@
+/* Optional official Minecraft Seven v2 face. See THIRD_PARTY_NOTICES.md. */
+@font-face {
+  font-family: "Minecraft Seven";
+  src: url("./fonts/minecraft-seven.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}

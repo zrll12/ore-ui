@@ -26,11 +26,11 @@ Source: [Minecraft - Ore UI Style](https://www.figma.com/design/XAEZlcgBRTwyL5Ev
 
 At source scale (`size="xl"`): 105px outer height, 89px face height, 36px font, 4px stroke, 8px bottom shadow. The source width is 648px; the library keeps width content-based, while the playground's default 324px width and 52.5px height show the 50% version.
 
-The outer hit region never moves or resizes. The pressed face moves down 12px, becomes 85px high, and loses its shadow. Disabled faces fill 97px inside the frame, use the hover background, and reduce label opacity to 50%. Focus uses a white outline. Hover/pressed combinations inherit the appropriate highlight and stroke tokens.
+The outer hit region never moves or resizes. The pressed face moves down 12px, becomes 85px high, and loses its shadow. Per the review correction, disabled faces use the same 85px height as the pressed face, with a 4px frame on each side (93px total height). They use the hover background and reduce label opacity to 50%. Focus uses a white outline. Hover/pressed combinations inherit the appropriate highlight and stroke tokens.
 
 ## Motion and extensions
 
-The design returned no keyframe tracks. Pointer press feedback uses an implementation-selected 160ms transform transition with the existing `--ore-ease-out` curve. Height and shadow switch immediately, rather than animating layout/paint. Keyboard press transitions immediately; reduced-motion disables travel. The standalone framework-independent spring helper remains available for larger displacement on an outer wrapper.
+The design returned no keyframe tracks. Pointer press feedback uses an implementation-selected 160ms transform transition with the existing `--ore-ease-out` curve. Height switches immediately. Shadow offset animates to zero with the same duration and easing as the surface displacement; a matching zero-offset shadow preserves interpolation. The connected top/left highlight and bottom/right stroke are drawn on a single border box, rather than on two offset nested boxes. Keyboard press transitions immediately; reduced-motion disables travel. The standalone framework-independent spring helper remains available for larger displacement on an outer wrapper.
 
 Responsive width, scale presets, loading indicator, `fullWidth`, and `unstyled` are library adaptations. The first implementation covers horizontal text and custom children/icons; vertical composition is outside this change.
 

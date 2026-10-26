@@ -61,12 +61,10 @@ h1 { font-family:"Minecraft Seven",monospace; font-size:48px; font-weight:400; l
 .state-example { display:flex; justify-content:center; }
 .state-example .ore-button { width:100%; --ore-button-padding:10px; }
 .state-example[data-preview-state=hovered] .ore-button { --ore-face:var(--ore-hover); }
-.state-example[data-preview-state=hovered] .ore-button__surface { border-color:var(--ore-stroke-hover); }
-.state-example[data-preview-state=hovered] .ore-button__content { border-color:var(--ore-highlight-hover); }
+.state-example[data-preview-state=hovered] .ore-button__surface { border-color:var(--ore-stroke-hover); border-top-color:var(--ore-highlight-hover); border-left-color:var(--ore-highlight-hover); }
 .state-example[data-preview-state=focused] .ore-button { outline:var(--ore-unit) solid var(--ore-focus); outline-offset:0; }
 .state-example[data-preview-state=pressed] .ore-button { --ore-face:var(--ore-pressed); }
-.state-example[data-preview-state=pressed] .ore-button__surface { transform:translateY(calc(var(--ore-unit)*3)); height:calc(var(--ore-unit)*21.25); box-shadow:none; border-color:var(--ore-stroke-hover); transition:none; }
-.state-example[data-preview-state=pressed] .ore-button__content { border-color:var(--ore-highlight-hover); }
+.state-example[data-preview-state=pressed] .ore-button__surface { transform:translateY(calc(var(--ore-unit)*3)); height:var(--ore-pressed-height); box-shadow:0 0 0 var(--ore-shadow); border-color:var(--ore-stroke-hover); border-top-color:var(--ore-highlight-hover); border-left-color:var(--ore-highlight-hover); transition:none; }
 .button-icon { position:relative; display:inline-flex; flex-shrink:0; width:16px; height:16px; }
 .button-icon>img { position:absolute; left:0; top:0; transform-origin:top left; }
 .token-palette { grid-template-columns:repeat(5,1fr); }

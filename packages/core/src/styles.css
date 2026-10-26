@@ -57,6 +57,8 @@
   .ore-button {
     --ore-unit: 2px;
     --ore-button-padding: 24px;
+    --ore-surface-height: calc(var(--ore-unit) * 22.25);
+    --ore-pressed-height: calc(var(--ore-unit) * 21.25);
     --ore-face: var(--ore-colored-background);
     --ore-hover: var(--ore-colored-hover);
     --ore-pressed: var(--ore-colored-pressed);
@@ -127,34 +129,42 @@
   .ore-button[data-size="xl"] { --ore-unit: 4px; --ore-button-padding: 48px; }
   .ore-button[data-full-width] { width: 100%; }
   .ore-button .ore-button__surface {
-    display: flex; flex: 1; min-width: 0; height: calc(var(--ore-unit) * 22.25);
-    padding: var(--ore-unit); border: solid var(--ore-stroke);
-    border-width: 0 var(--ore-unit) var(--ore-unit) 0;
+    display: flex; flex: 1; min-width: 0; height: var(--ore-surface-height);
+    padding: var(--ore-unit); border: var(--ore-unit) solid var(--ore-stroke);
+    border-top-color: var(--ore-highlight); border-left-color: var(--ore-highlight);
     background: var(--ore-face); box-shadow: 0 calc(var(--ore-unit) * 2) 0 var(--ore-shadow);
-    transform: translateY(0); transition: transform var(--ore-press-duration) var(--ore-ease-out);
+    transform: translateY(0);
+    transition: transform var(--ore-press-duration) var(--ore-ease-out),
+      box-shadow var(--ore-press-duration) var(--ore-ease-out);
   }
   .ore-button .ore-button__content {
     position: relative; display: flex; flex: 1; align-items: center; justify-content: center;
-    border: solid var(--ore-highlight); border-width: var(--ore-unit) 0 0 var(--ore-unit);
+
     min-width: 0; height: 100%; padding-inline: var(--ore-button-padding);
   }
   .ore-button .ore-button__label { display: inline-flex; align-items: center; justify-content: center; gap: calc(var(--ore-unit) * 4); white-space: nowrap; }
   .ore-button:focus-visible { outline: var(--ore-unit) solid var(--ore-focus); outline-offset: 0; }
   @media (hover: hover) and (pointer: fine) {
     .ore-button:hover:not(:disabled) { --ore-face: var(--ore-hover); }
-    .ore-button:hover:not(:disabled) .ore-button__surface { border-color: var(--ore-stroke-hover); }
-    .ore-button:hover:not(:disabled) .ore-button__content { border-color: var(--ore-highlight-hover); }
+    .ore-button:hover:not(:disabled) .ore-button__surface {
+      border-color: var(--ore-stroke-hover);
+      border-top-color: var(--ore-highlight-hover); border-left-color: var(--ore-highlight-hover);
+    }
   }
   /* The hit target stays fixed. Only its surface travels into the reserved depth. */
   .ore-button:active:not(:disabled) { --ore-face: var(--ore-pressed); }
   .ore-button:active:not(:disabled) .ore-button__surface {
-    height: calc(var(--ore-unit) * 21.25); transform: translateY(calc(var(--ore-unit) * 3));
-    box-shadow: none; border-color: var(--ore-stroke-hover);
+    height: var(--ore-pressed-height); transform: translateY(calc(var(--ore-unit) * 3));
+    box-shadow: 0 0 0 var(--ore-shadow); border-color: var(--ore-stroke-hover);
+    border-top-color: var(--ore-highlight-hover); border-left-color: var(--ore-highlight-hover);
   }
-  .ore-button:active:not(:disabled) .ore-button__content { border-color: var(--ore-highlight-hover); }
   .ore-button:active:focus-visible .ore-button__surface { transition: none; }
-  .ore-button:disabled { --ore-face: var(--ore-hover); cursor: not-allowed; padding-bottom: var(--ore-unit); }
-  .ore-button:disabled .ore-button__surface { height: calc(var(--ore-unit) * 24.25); box-shadow: none; }
+  .ore-button:disabled {
+    --ore-face: var(--ore-hover); cursor: not-allowed;
+    height: calc(var(--ore-pressed-height) + var(--ore-unit) * 2);
+    padding-bottom: var(--ore-unit);
+  }
+  .ore-button:disabled .ore-button__surface { height: var(--ore-pressed-height); box-shadow: 0 0 0 var(--ore-shadow); }
   .ore-button:disabled .ore-button__label { opacity: 0.5; }
   .ore-button[data-loading] { cursor: wait; }
   .ore-button[data-loading] .ore-button__label { opacity: 0; }
@@ -162,7 +172,7 @@
   @keyframes ore-loading { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) {
     .ore-button .ore-button__surface { transition: none; }
-    .ore-button:active:not(:disabled) .ore-button__surface { transform: none; height: calc(var(--ore-unit) * 22.25); }
+    .ore-button:active:not(:disabled) .ore-button__surface { transform: none; height: var(--ore-surface-height); }
     .ore-button .ore-button__loader { animation: none; opacity: 0.65; }
   }
   @media (forced-colors: active) {

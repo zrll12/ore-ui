@@ -7,7 +7,8 @@
     ".": "./src/index.ts",
     "./motion": "./src/motion.ts",
     "./styles.css": "./src/styles.css",
-    "./select": "./src/select.ts"
+    "./select": "./src/select.ts",
+    "./choice": "./src/choice.ts"
   },
   "dependencies": {
     "@zag-js/select": "^1.46.0",

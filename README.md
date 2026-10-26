@@ -143,3 +143,23 @@ Svelte 的导入路径为 `@ore-ui/svelte`，可用 `<Select {options} label="Ga
 包含键盘方向键、Home/End、typeahead、Enter、Escape、禁用选项、表单提交/重置、可见 label、`aria-label` / `aria-describedby`、required/invalid、ref、portal 定位与视口避让。演示页从左侧 Select 入口访问，也可直接打开 `/#select`。
 
 下拉样式沿用已经确认的 MC tokens；本阶段 Figma 配额未恢复，尚未与 Select 源稿逐像素对照。设计及 API 范围见 [Select 说明](./docs/select-design.md)。
+
+## Radio / Checkbox 与选择组
+
+新增 `Radio`、`RadioGroup`、`Checkbox`、`CheckboxGroup`，均从两个框架的主入口导入，复用现有 `styles.css` 和可选的 `fonts.css`。
+
+```tsx
+import { Radio, RadioGroup, Checkbox, CheckboxGroup } from '@ore-ui/react';
+
+<Radio label="Survival" name="mode" value="survival" defaultChecked />
+<Checkbox label="Keep inventory" name="inventory" value="yes" defaultChecked />
+
+<RadioGroup label="Game mode" name="mode" options={modeOptions}
+  defaultValue="survival" onValueChange={value => console.log(value)} />
+<CheckboxGroup label="Game rules" name="rules" options={ruleOptions}
+  defaultValue={['inventory']} required onValueChange={values => console.log(values)} />
+```
+
+`options` 支持 `{ value, label, description?, disabled? }`。React 独立控件用 `checked` / `onCheckedChange`，组用 `value` / `onValueChange`；Svelte 对应 `bind:checked` 与 `bind:value`。`Checkbox` 支持 `indeterminate` 半选态。组支持 `orientation="horizontal"`、整体禁用、required、表单提交与重置，以及外部 `form` 关联。多选组 required 表示至少勾选一个可用项。
+
+四个独立演示入口：`/#radio`、`/#radio-group`、`/#checkbox`、`/#checkbox-group`，包含受控参数、React / Svelte 代码、全选与原生表单示例。API 范围和原生语义说明见 [选择控件说明](./docs/choice-design.md)。

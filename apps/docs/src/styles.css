@@ -102,3 +102,21 @@ button.ore-select__trigger:focus-visible { outline:var(--ore-unit) solid var(--o
   .select-playground .toggle-list { display:flex; gap:15px; }
   .select-example-card,.select-form { padding:20px; }
 }
+/* Native choice demos */
+.choice-stage { min-height:340px; padding:40px 36px 75px; }
+.choice-live { color:#e6e6e8; max-width:100%; }
+.choice-live .ore-choice-group { max-width:100%; }
+.choice-playground .playground-main { min-height:440px; }
+.choice-playground .controls { min-width:0; }
+.choice-playground .controls .toggle-list { gap:15px; }
+.choice-form { display:grid; gap:28px; padding:28px; border:1px solid var(--border); background:var(--surface); }
+.choice-form-result { color:var(--muted); font-size:11px; line-height:1.8; overflow-wrap:anywhere; }
+.choice-select-all { display:grid; gap:25px; }
+.choice-select-all>.ore-choice { padding-bottom:18px; border-bottom:1px solid var(--border); }
+@media(max-width:480px) {
+  .hero-title:has(h1) { flex-wrap:wrap; gap:12px; }
+  .choice-stage { padding:30px 20px 65px; }
+  .choice-playground .controls { display:block; }
+  .choice-playground .toggle-list { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+  .choice-form { padding:20px; }
+}

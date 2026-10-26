@@ -78,7 +78,8 @@
     font-weight: 400; line-height: normal; text-align: center; text-decoration: none;
     cursor: pointer; -webkit-tap-highlight-color: transparent;
   }
-  .ore-button[data-variant="general"], .ore-select[data-variant="general"], .ore-select__positioner[data-variant="general"] {
+  .ore-choice, .ore-choice-group { --ore-unit: 2px; --ore-face: var(--ore-colored-background); --ore-hover: var(--ore-colored-hover); --ore-text: var(--ore-colored-text); --ore-stroke: var(--ore-colored-stroke); --ore-shadow: var(--ore-colored-shadow); --ore-highlight: var(--ore-colored-highlight); }
+  .ore-button[data-variant="general"], .ore-select[data-variant="general"], .ore-select__positioner[data-variant="general"], .ore-choice[data-variant="general"], .ore-choice-group[data-variant="general"] {
     --ore-face: var(--ore-general-background);
     --ore-hover: var(--ore-general-hover);
     --ore-pressed: var(--ore-general-pressed);
@@ -89,7 +90,7 @@
     --ore-shadow: var(--ore-general-shadow);
     --ore-text: var(--ore-general-text);
   }
-  .ore-button[data-variant="destructive"], .ore-select[data-variant="destructive"], .ore-select__positioner[data-variant="destructive"] {
+  .ore-button[data-variant="destructive"], .ore-select[data-variant="destructive"], .ore-select__positioner[data-variant="destructive"], .ore-choice[data-variant="destructive"], .ore-choice-group[data-variant="destructive"] {
     --ore-face: var(--ore-destructive-background);
     --ore-hover: var(--ore-destructive-hover);
     --ore-pressed: var(--ore-destructive-pressed);
@@ -100,7 +101,7 @@
     --ore-shadow: var(--ore-destructive-shadow);
     --ore-text: var(--ore-destructive-text);
   }
-  .ore-button[data-variant="warning"], .ore-select[data-variant="warning"], .ore-select__positioner[data-variant="warning"] {
+  .ore-button[data-variant="warning"], .ore-select[data-variant="warning"], .ore-select__positioner[data-variant="warning"], .ore-choice[data-variant="warning"], .ore-choice-group[data-variant="warning"] {
     --ore-face: var(--ore-warning-background);
     --ore-hover: var(--ore-warning-hover);
     --ore-pressed: var(--ore-warning-pressed);
@@ -111,7 +112,7 @@
     --ore-shadow: var(--ore-warning-shadow);
     --ore-text: var(--ore-warning-text);
   }
-  .ore-button[data-variant="realms"], .ore-select[data-variant="realms"], .ore-select__positioner[data-variant="realms"] {
+  .ore-button[data-variant="realms"], .ore-select[data-variant="realms"], .ore-select__positioner[data-variant="realms"], .ore-choice[data-variant="realms"], .ore-choice-group[data-variant="realms"] {
     --ore-face: var(--ore-realms-background);
     --ore-hover: var(--ore-realms-hover);
     --ore-pressed: var(--ore-realms-pressed);
@@ -125,10 +126,10 @@
   .ore-select, .ore-select__positioner { --ore-unit: 2px; }
   .ore-select[data-variant="colored"], .ore-select__positioner[data-variant="colored"] { --ore-face: var(--ore-colored-background); --ore-hover: var(--ore-colored-hover); --ore-text: var(--ore-colored-text); --ore-stroke: var(--ore-colored-stroke); }
   .ore-button *, .ore-button *::before, .ore-button *::after { box-sizing: border-box; }
-  .ore-button[data-size="xs"], .ore-select[data-size="xs"], .ore-select__positioner[data-size="xs"] { --ore-unit: 1px; --ore-button-padding: 12px; }
-  .ore-button[data-size="sm"], .ore-select[data-size="sm"], .ore-select__positioner[data-size="sm"] { --ore-unit: 1.5px; --ore-button-padding: 18px; }
-  .ore-button[data-size="lg"], .ore-select[data-size="lg"], .ore-select__positioner[data-size="lg"] { --ore-unit: 3px; --ore-button-padding: 36px; }
-  .ore-button[data-size="xl"], .ore-select[data-size="xl"], .ore-select__positioner[data-size="xl"] { --ore-unit: 4px; --ore-button-padding: 48px; }
+  .ore-button[data-size="xs"], .ore-select[data-size="xs"], .ore-select__positioner[data-size="xs"], .ore-choice[data-size="xs"], .ore-choice-group[data-size="xs"] { --ore-unit: 1px; --ore-button-padding: 12px; }
+  .ore-button[data-size="sm"], .ore-select[data-size="sm"], .ore-select__positioner[data-size="sm"], .ore-choice[data-size="sm"], .ore-choice-group[data-size="sm"] { --ore-unit: 1.5px; --ore-button-padding: 18px; }
+  .ore-button[data-size="lg"], .ore-select[data-size="lg"], .ore-select__positioner[data-size="lg"], .ore-choice[data-size="lg"], .ore-choice-group[data-size="lg"] { --ore-unit: 3px; --ore-button-padding: 36px; }
+  .ore-button[data-size="xl"], .ore-select[data-size="xl"], .ore-select__positioner[data-size="xl"], .ore-choice[data-size="xl"], .ore-choice-group[data-size="xl"] { --ore-unit: 4px; --ore-button-padding: 48px; }
   .ore-button[data-full-width] { width: 100%; }
   .ore-button .ore-button__surface {
     display: flex; flex: 1; min-width: 0; height: var(--ore-surface-height);
@@ -218,5 +219,37 @@
     .ore-select__positioner .ore-select__content { border-color: CanvasText; }
     .ore-select__positioner .ore-select__item[data-highlighted] { outline: 2px solid Highlight; }
     .ore-select__positioner .ore-select__item[data-disabled] { color: GrayText; }
+  }
+}
+@layer ore.components {
+  .ore-choice, .ore-choice-group { font-family: var(--ore-font); box-sizing: border-box; }
+  .ore-choice, .ore-choice * { box-sizing: border-box; }
+  .ore-choice { position: relative; display: inline-flex; align-items: flex-start; gap: calc(var(--ore-unit) * 5); min-height: calc(var(--ore-unit) * 14); padding-block: calc(var(--ore-unit) * 2); cursor: pointer; vertical-align: top; font-size: calc(var(--ore-unit) * 8); line-height: 1.5; }
+  .ore-choice .ore-choice__input { position: absolute; opacity: 0; margin: 0; width: calc(var(--ore-unit) * 12); height: calc(var(--ore-unit) * 12); left: 0; top: calc(var(--ore-unit) * 2); cursor: inherit; }
+  .ore-choice .ore-choice__control { position: relative; flex-shrink: 0; display: grid; place-items: center; width: calc(var(--ore-unit) * 12); height: calc(var(--ore-unit) * 12); background: #313233; border: var(--ore-unit) solid var(--ore-frame); box-shadow: inset var(--ore-unit) var(--ore-unit) 0 #ffffff22, inset calc(var(--ore-unit) * -1) calc(var(--ore-unit) * -1) 0 #0005; pointer-events: none; }
+  .ore-choice .ore-choice__copy { display: flex; flex-direction: column; min-width: 0; }
+  .ore-choice .ore-choice__label { display: block; }
+  .ore-choice .ore-choice__description { display: block; font-family: inherit; font-size: .8em; line-height: 1.6; opacity: .65; margin-top: 2px; }
+  .ore-choice .ore-choice__mark { display: none; }
+  .ore-choice .ore-choice__input:checked + .ore-choice__control,
+  .ore-choice .ore-choice__input:is(:indeterminate, [aria-checked="mixed"]) + .ore-choice__control { background: var(--ore-face); border-color: var(--ore-shadow); box-shadow: inset var(--ore-unit) var(--ore-unit) 0 var(--ore-highlight), inset calc(var(--ore-unit) * -1) calc(var(--ore-unit) * -1) 0 var(--ore-stroke); }
+  .ore-choice .ore-choice__input:checked + .ore-choice__control .ore-choice__mark { display: block; width: calc(var(--ore-unit) * 3); height: calc(var(--ore-unit) * 5); border: solid var(--ore-text); border-width: 0 var(--ore-unit) var(--ore-unit) 0; transform: translateY(calc(var(--ore-unit) * -.5)) rotate(45deg); }
+  /* A clipped square retains the block-built shape while reading as a radio control. */
+  .ore-choice[data-kind="radio"] .ore-choice__control { clip-path: polygon(25% 0,75% 0,75% 8.333333%,91.666667% 8.333333%,91.666667% 25%,100% 25%,100% 75%,91.666667% 75%,91.666667% 91.666667%,75% 91.666667%,75% 100%,25% 100%,25% 91.666667%,8.333333% 91.666667%,8.333333% 75%,0 75%,0 25%,8.333333% 25%,8.333333% 8.333333%,25% 8.333333%); }
+  .ore-choice[data-kind="radio"] .ore-choice__input:checked + .ore-choice__control .ore-choice__mark { width: calc(var(--ore-unit) * 4); height: calc(var(--ore-unit) * 4); border: 0; background: var(--ore-text); transform: none; }
+  .ore-choice .ore-choice__input:is(:indeterminate, [aria-checked="mixed"]) + .ore-choice__control .ore-choice__mark { display: block; width: calc(var(--ore-unit) * 6); height: var(--ore-unit); border: 0; background: var(--ore-text); transform: none; }
+  .ore-choice:has(.ore-choice__input:focus-visible) { outline: var(--ore-unit) solid var(--ore-focus); outline-offset: 3px; }
+  .ore-choice[data-invalid] .ore-choice__control { outline: var(--ore-unit) solid var(--ore-destructive-background); outline-offset: 1px; }
+  .ore-choice:has(.ore-choice__input:disabled) { opacity: .45; cursor: not-allowed; }
+  .ore-choice-group { min-inline-size: 0; margin: 0; padding: 0; border: 0; font-size: calc(var(--ore-unit) * 8); }
+  .ore-choice-group .ore-choice-group__legend { padding: 0; margin-bottom: calc(var(--ore-unit) * 5); line-height: 1.5; }
+  .ore-choice-group .ore-choice-group__description { opacity: .65; font-size: .8em; margin: 0 0 calc(var(--ore-unit) * 5); line-height: 1.7; }
+  .ore-choice-group .ore-choice-group__items { display: flex; flex-direction: column; align-items: flex-start; gap: calc(var(--ore-unit) * 4); }
+  .ore-choice-group[data-orientation="horizontal"] .ore-choice-group__items { flex-direction: row; flex-wrap: wrap; gap: calc(var(--ore-unit) * 10); }
+  @media (hover: hover) and (pointer: fine) { .ore-choice:hover .ore-choice__input:not(:disabled) + .ore-choice__control { outline: var(--ore-unit) solid var(--ore-stroke); outline-offset: 1px; } }
+  @media (forced-colors: active) {
+    .ore-choice .ore-choice__input { position: static; opacity: 1; width: auto; height: auto; appearance: auto; }
+    .ore-choice .ore-choice__control { display: none; }
+    .ore-choice:has(.ore-choice__input:focus-visible) { outline-color: Highlight; }
   }
 }

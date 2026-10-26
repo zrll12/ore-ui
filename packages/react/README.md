@@ -25,3 +25,8 @@ import { Select } from "@ore-ui/react";
 ```
 
 Single selection with a string value. Supports `value`, `defaultValue`, `onValueChange`, disabled options, `label`, `placeholder`, `name`, `form`, `required`, `invalid`, `variant`, `size`, `fullWidth`, and `unstyled`. Popup styles share the same explicit stylesheet import as Button. Use value + onValueChange for controlled selection; ref points at the trigger.
+
+## Native choice controls
+
+Also exports `Radio`, `RadioGroup`, `Checkbox`, and `CheckboxGroup`. Singles expose `checked`, `defaultChecked`, `onCheckedChange`; Checkbox additionally supports `indeterminate`. Groups take `{value, label, description?, disabled?}[]` options, `value`, `defaultValue`, and `onValueChange`; RadioGroup uses a string and CheckboxGroup uses a string array. Both support `name`, `form`, `disabled`, `required`, `orientation`, and the shared appearance props. CheckboxGroup required means at least one enabled option. Native input / fieldset refs and form reset are preserved.
+React supports controlled and uncontrolled state; refs target native inputs or group fieldsets.

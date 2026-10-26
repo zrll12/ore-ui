@@ -163,3 +163,15 @@ import { Radio, RadioGroup, Checkbox, CheckboxGroup } from '@ore-ui/react';
 `options` 支持 `{ value, label, description?, disabled? }`。React 独立控件用 `checked` / `onCheckedChange`，组用 `value` / `onValueChange`；Svelte 对应 `bind:checked` 与 `bind:value`。`Checkbox` 支持 `indeterminate` 半选态。组支持 `orientation="horizontal"`、整体禁用、required、表单提交与重置，以及外部 `form` 关联。多选组 required 表示至少勾选一个可用项。
 
 四个独立演示入口：`/#radio`、`/#radio-group`、`/#checkbox`、`/#checkbox-group`，包含受控参数、React / Svelte 代码、全选与原生表单示例。API 范围和原生语义说明见 [选择控件说明](./docs/choice-design.md)。
+
+### Switch
+
+`Switch` is available from both public packages, using the same appearance props as Checkbox. It exposes a native checkbox with `role="switch"`, supports `checked` / `defaultChecked`, `onCheckedChange`, native form attributes and input refs. Svelte also supports `bind:checked` and `bind:ref`. Switch is strictly on/off and has no indeterminate state.
+
+```tsx
+import { Switch } from '@ore-ui/react';
+
+<Switch label="Daylight cycle" name="daylight" defaultChecked />
+```
+
+The demo is available at `/#switch`. The track and elevated thumb follow the supplied Switch screenshot, including the thumb-only focus ring, neutral disabled states, and `withIcons` 1/0 marks (enabled by default). Both track halves and their labels remain fixed while the outlined, bottom-shadowed thumb moves over them. Thumb travel uses an interruptible 160ms transform transition; reduced-motion preferences disable the travel animation. Styling and form behavior reuse the shared choice foundation.

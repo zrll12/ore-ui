@@ -1,0 +1,32 @@
+import { afterEach, expect, it, vi } from 'vitest';
+import { act, cleanup, fireEvent, render, waitFor } from '@testing-library/react';
+import { createRef } from 'react';
+import { Switch } from '../packages/react/src';
+afterEach(cleanup);
+it('exposes a switch with a native ref, form values, validation, and reset', async () => {
+  const ref = createRef<HTMLInputElement>();
+  const onCheckedChange = vi.fn();
+  const { getByRole, container } = render(<form><Switch label="Daylight" name="daylight" value="on" required ref={ref} onCheckedChange={onCheckedChange}/></form>);
+  const input = getByRole('switch', { name: 'Daylight' });
+  const form = container.querySelector('form')!;
+  expect(ref.current).toBe(input);
+  expect(form.checkValidity()).toBe(false);
+  fireEvent.click(input);
+  expect(input).toBeChecked();
+  expect(onCheckedChange).toHaveBeenLastCalledWith(true);
+  expect(new FormData(form).get('daylight')).toBe('on');
+  expect(form.checkValidity()).toBe(true);
+  await act(async () => form.reset());
+  await waitFor(() => expect(input).not.toBeChecked());
+  expect(onCheckedChange).toHaveBeenLastCalledWith(false);
+});
+it('respects controlled checkedness and inherited disabled state', () => {
+  const change = vi.fn();
+  const { getByRole, rerender, container } = render(<form><Switch label="Music" checked={false} onCheckedChange={change}/></form>);
+  fireEvent.click(getByRole('switch'));
+  expect(change).toHaveBeenCalledWith(true);
+  expect(getByRole('switch')).not.toBeChecked();
+  rerender(<form><fieldset disabled><Switch label="Music" name="music" defaultChecked/></fieldset></form>);
+  expect(getByRole('switch')).toBeDisabled();
+  expect(new FormData(container.querySelector('form')!).has('music')).toBe(false);
+});

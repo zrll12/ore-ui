@@ -30,3 +30,5 @@ Single selection with a string value. Supports `value`, `defaultValue`, `onValue
 
 Also exports `Radio`, `RadioGroup`, `Checkbox`, and `CheckboxGroup`. Singles expose `checked`, `defaultChecked`, `onCheckedChange`; Checkbox additionally supports `indeterminate`. Groups take `{value, label, description?, disabled?}[]` options, `value`, `defaultValue`, and `onValueChange`; RadioGroup uses a string and CheckboxGroup uses a string array. Both support `name`, `form`, `disabled`, `required`, `orientation`, and the shared appearance props. CheckboxGroup required means at least one enabled option. Native input / fieldset refs and form reset are preserved.
 React supports controlled and uncontrolled state; refs target native inputs or group fieldsets.
+
+`Switch` / `SwitchProps` provides a native two-state switch with checked/defaultChecked, onCheckedChange, native form attributes, and an input ref. Svelte also supports bind:checked and bind:ref. It uses the shared stylesheet, supports `withIcons` 1/0 marks (enabled by default), and does not support indeterminate state. Thumb travel animates for 160ms and respects reduced-motion preferences.

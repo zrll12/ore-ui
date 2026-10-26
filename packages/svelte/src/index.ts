@@ -13,3 +13,5 @@ export type { RadioProps } from './Radio.svelte';
 export type { RadioGroupProps } from './RadioGroup.svelte';
 export type { CheckboxProps } from './Checkbox.svelte';
 export type { CheckboxGroupProps } from './CheckboxGroup.svelte';
+export { default as Switch } from './Switch.svelte';
+export type { SwitchProps } from './Switch.svelte';

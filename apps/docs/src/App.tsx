@@ -8,12 +8,12 @@ import { ArrowUpRight, ArrowRight, Check, ChevronRight, Copy, Command, Search, M
 type Framework = 'React' | 'Svelte';
 const swatches = { colored: '#387e24', general: '#d0d1d5', destructive: '#c93636', warning: '#e1b922', realms: '#7345e5' };
 const names = { colored: 'Colored', general: 'General', destructive: 'Destructive', warning: 'Warning', realms: 'Realms' };
-const choicePages = ['radio', 'radio-group', 'checkbox', 'checkbox-group'];
+const choicePages = ['radio', 'radio-group', 'checkbox', 'checkbox-group', 'switch'];
 function currentPage() { const hash = location.hash.slice(1); return choicePages.includes(hash) ? hash : hash.startsWith('select') ? 'select' : 'button'; }
 const figmaUrl = 'https://www.figma.com/design/XAEZlcgBRTwyL5EvAVWdV3/?node-id=425-8428';
 const navigation = [
   { title: 'GETTING STARTED', links: [{ name: 'Introduction', href: '#introduction' }, { name: 'Installation', href: '#installation' }, { name: 'Architecture', href: '#architecture' }] },
-  { title: 'COMPONENTS', links: [{ name: 'Button', href: '#button', active: true }, { name: 'Select', href: '#select', active: true }, { name: 'Radio', href: '#radio' }, { name: 'RadioGroup', href: '#radio-group' }, { name: 'Checkbox', href: '#checkbox' }, { name: 'CheckboxGroup', href: '#checkbox-group' }] },
+  { title: 'COMPONENTS', links: [{ name: 'Button', href: '#button', active: true }, { name: 'Select', href: '#select', active: true }, { name: 'Radio', href: '#radio' }, { name: 'RadioGroup', href: '#radio-group' }, { name: 'Checkbox', href: '#checkbox' }, { name: 'CheckboxGroup', href: '#checkbox-group' }, { name: 'Switch', href: '#switch' }] },
   { title: 'FOUNDATIONS', links: [{ name: 'Design tokens', href: '#tokens' }, { name: 'Motion', href: '#motion' }, { name: 'Accessibility', href: '#accessibility' }] },
 ];
 function Code({ source }: { source: string }) {

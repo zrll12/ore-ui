@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.package-input/
+.svelte-kit/
+coverage/
+.DS_Store
+*.tgz
+
+# Generated package archives and preview screenshots
+/artifacts/

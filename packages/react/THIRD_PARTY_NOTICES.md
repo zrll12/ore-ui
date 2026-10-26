@@ -2,12 +2,14 @@
 
 ## Minecraft — Ore UI Style
 
-Button appearance and palette values adapted from “Minecraft - Ore UI Style” by Miljö AB and Turóczi Ádám.
+Button, Radio, and Checkbox appearance and palette values adapted from “Minecraft - Ore UI Style” by Miljö AB and Turóczi Ádám.
 
 - Community source: https://www.figma.com/community/file/1675191037788105821/minecraft-ore-ui-style
 - Design reference: https://www.figma.com/design/XAEZlcgBRTwyL5EvAVWdV3/?node-id=425-8428
 - Community resource license: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/
 - Changes: native accessible HTML buttons, React / Svelte adapters, responsive sizing, reduced-motion handling, loading state, and CSS token implementation.
+
+The Checkbox check and minus vector paths in `dist/icons/choice-check.svg` and `dist/icons/choice-minus.svg` are retained from the user-exported community design SVG. CSS masks apply framework-independent semantic colors, and the controls scale the source geometry.
 
 ## Minecraft Seven v2
 

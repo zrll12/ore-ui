@@ -79,7 +79,7 @@
     font-weight: 400; line-height: normal; text-align: center; text-decoration: none;
     cursor: pointer; -webkit-tap-highlight-color: transparent;
   }
-  .ore-choice, .ore-choice-group { --ore-unit: 2px; --ore-face: var(--ore-colored-background); --ore-hover: var(--ore-colored-hover); --ore-text: var(--ore-colored-text); --ore-stroke: var(--ore-colored-stroke); --ore-shadow: var(--ore-colored-shadow); --ore-highlight: var(--ore-colored-highlight); }
+  .ore-choice, .ore-choice-group { --ore-unit: 2px; --ore-face: var(--ore-colored-background); --ore-hover: var(--ore-colored-hover); --ore-pressed: var(--ore-colored-pressed); --ore-stroke-hover: var(--ore-colored-stroke-hover); --ore-text: var(--ore-colored-text); --ore-stroke: var(--ore-colored-stroke); --ore-shadow: var(--ore-colored-shadow); --ore-highlight: var(--ore-colored-highlight); }
   .ore-button[data-variant="general"], .ore-select[data-variant="general"], .ore-select__positioner[data-variant="general"], .ore-choice[data-variant="general"], .ore-choice-group[data-variant="general"] {
     --ore-face: var(--ore-general-background);
     --ore-hover: var(--ore-general-hover);
@@ -232,26 +232,37 @@
   .ore-choice .ore-choice__label { display: block; }
   .ore-choice .ore-choice__description { display: block; font-family: inherit; font-size: .8em; line-height: 1.6; opacity: .65; margin-top: 2px; }
   .ore-choice .ore-choice__mark { display: none; }
-  .ore-choice .ore-choice__input:checked + .ore-choice__control,
-  .ore-choice .ore-choice__input:is(:indeterminate, [aria-checked="mixed"]) + .ore-choice__control { background: var(--ore-face); border-color: var(--ore-shadow); box-shadow: inset var(--ore-unit) var(--ore-unit) 0 var(--ore-highlight), inset calc(var(--ore-unit) * -1) calc(var(--ore-unit) * -1) 0 var(--ore-stroke); }
-  .ore-choice .ore-choice__input:checked + .ore-choice__control .ore-choice__mark { display: block; width: calc(var(--ore-unit) * 3); height: calc(var(--ore-unit) * 5); border: solid var(--ore-text); border-width: 0 var(--ore-unit) var(--ore-unit) 0; transform: translateY(calc(var(--ore-unit) * -.5)) rotate(45deg); }
-  /* A clipped square retains the block-built shape while reading as a radio control. */
-  /* A fixed layout box contains the rotated face, so labels and hit targets stay upright. */
-  .ore-choice[data-kind="radio"] .ore-choice__input + .ore-choice__control { background: none; border: 0; box-shadow: none; }
-  .ore-choice[data-kind="radio"] .ore-choice__control::before { content: ""; position: absolute; box-sizing: border-box; width: calc(var(--ore-unit) * 8); height: calc(var(--ore-unit) * 8); transform: rotate(45deg); background: var(--ore-face); border: calc(var(--ore-unit) * .5) solid var(--ore-frame); box-shadow: inset var(--ore-unit) var(--ore-unit) 0 var(--ore-stroke), inset calc(var(--ore-unit) * -1) calc(var(--ore-unit) * -1) 0 var(--ore-shadow); }
-  .ore-choice[data-kind="radio"] .ore-choice__input:checked + .ore-choice__control .ore-choice__mark { position: relative; width: calc(var(--ore-unit) * 4.25); height: calc(var(--ore-unit) * 4.25); border: 0; background: conic-gradient(from 0deg, #e6e8eb 0deg 90deg, #c7cbd0 90deg 180deg, #e6e8eb 180deg 270deg, #fff 270deg); transform: rotate(45deg); }
-  .ore-choice[data-kind="radio"]:is([data-variant="general"], [data-variant="warning"]) .ore-choice__mark { filter: brightness(.2); }
-  .ore-choice[data-kind="radio"]:has(.ore-choice__input:focus-visible) { outline: none; }
-  .ore-choice[data-kind="radio"] .ore-choice__input:focus-visible + .ore-choice__control::before { outline: var(--ore-unit) solid var(--ore-focus); outline-offset: var(--ore-unit); }
-  .ore-choice[data-kind="radio"][data-invalid] .ore-choice__control::before { outline: var(--ore-unit) solid var(--ore-destructive-background); outline-offset: var(--ore-unit); }
-  .ore-choice[data-kind="radio"][data-invalid] .ore-choice__control { outline: none; }
-  .ore-choice[data-kind="radio"]:has(.ore-choice__input:disabled) { --ore-face: #8c8d90; --ore-stroke: #b1b2b5; --ore-shadow: #59595b; opacity: 1; }
-  .ore-choice[data-kind="radio"] .ore-choice__input:disabled + .ore-choice__control .ore-choice__mark { filter: grayscale(1) brightness(.65); }
-  .ore-choice[data-kind="radio"]:has(.ore-choice__input:disabled) .ore-choice__copy { opacity: .45; }
-  .ore-choice .ore-choice__input:is(:indeterminate, [aria-checked="mixed"]) + .ore-choice__control .ore-choice__mark { display: block; width: calc(var(--ore-unit) * 6); height: var(--ore-unit); border: 0; background: var(--ore-text); transform: none; }
-  .ore-choice:has(.ore-choice__input:focus-visible) { outline: var(--ore-unit) solid var(--ore-focus); outline-offset: 3px; }
+  /* Checkbox geometry: the exported source is 58 × 58 with 4px frame/bevels. */
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch) { --ore-check-edge: calc(var(--ore-unit) * .827586207); --ore-check-highlight: #ffffff66; }
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch) .ore-choice__control { background: #b1b2b6; border: var(--ore-check-edge) solid var(--ore-frame); box-shadow: inset calc(var(--ore-check-edge) * -1) var(--ore-check-edge) 0 #e3e3e5; }
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch) .ore-choice__input:is(:checked, :indeterminate, [aria-checked="mixed"]) + .ore-choice__control { background: var(--ore-pressed); box-shadow: inset calc(var(--ore-check-edge) * -1) var(--ore-check-edge) 0 var(--ore-stroke-hover), inset var(--ore-check-edge) calc(var(--ore-check-edge) * -1) 0 var(--ore-check-highlight); }
+  /* Shade only the inner face, keeping even translucent bevel colors unchanged. */
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch) .ore-choice__control::before { content: ""; position: absolute; inset: var(--ore-check-edge); background: #000; opacity: 0; }
+  .ore-choice[data-kind="checkbox"][data-variant="warning"] { --ore-check-highlight: #ffffff33; }
+  .ore-choice[data-kind="checkbox"][data-variant="realms"] { --ore-check-highlight: #fab0ff66; }
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch) .ore-choice__input:checked + .ore-choice__control .ore-choice__mark { display: block; position: absolute; inset: calc(var(--ore-check-edge) * -1); filter: drop-shadow(calc(var(--ore-unit) * .64137931) calc(var(--ore-unit) * .64137931) 0 #0008); }
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch) .ore-choice__mark::before { content: ""; display: block; width: 100%; height: 100%; background: var(--ore-text); mask: url('./icons/choice-check.svg') center / 100% 100% no-repeat; }
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch) .ore-choice__input:is(:indeterminate, [aria-checked="mixed"]) + .ore-choice__control .ore-choice__mark { display: block; position: absolute; inset: calc(var(--ore-check-edge) * -1); filter: drop-shadow(calc(var(--ore-unit) * .64137931) calc(var(--ore-unit) * .64137931) 0 #0008); }
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch) .ore-choice__input:is(:indeterminate, [aria-checked="mixed"]) + .ore-choice__control .ore-choice__mark::before { mask-image: url('./icons/choice-minus.svg'); }
+  .ore-choice:has(.ore-choice__input:focus-visible) { outline: none; }
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch) .ore-choice__input:focus-visible + .ore-choice__control { outline: var(--ore-check-edge) solid var(--ore-focus); outline-offset: 0; }
   .ore-choice[data-invalid] .ore-choice__control { outline: var(--ore-unit) solid var(--ore-destructive-background); outline-offset: 1px; }
-  .ore-choice:has(.ore-choice__input:disabled) { opacity: .45; cursor: not-allowed; }
+  .ore-choice:has(.ore-choice__input:disabled) { cursor: not-allowed; }
+  .ore-choice:has(.ore-choice__input:disabled) .ore-choice__copy { opacity: .45; }
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch):has(.ore-choice__input:disabled) { --ore-pressed: #8c8d90; --ore-stroke-hover: #a3a4a6; --ore-check-highlight: #a3a4a6; --ore-text: #666; }
+  .ore-choice[data-kind="checkbox"]:not(.ore-switch) .ore-choice__input:disabled + .ore-choice__control { background: #8c8d90; box-shadow: inset 0 0 0 var(--ore-check-edge) #a3a4a6; }
+  /* Radio source: 64px rotated square, 4px frame, 4px uniform stroke, 32px center. */
+  .ore-choice[data-kind="radio"] { --ore-radio-edge: calc(var(--ore-unit) * .530330086); --ore-radio-top: #fff; --ore-radio-mid: #e6e8eb; --ore-radio-bottom: #d0d1d4; }
+  .ore-choice[data-kind="radio"] .ore-choice__input + .ore-choice__control { background: none; border: 0; box-shadow: none; }
+  .ore-choice[data-kind="radio"] .ore-choice__control::before { content: ""; position: absolute; box-sizing: border-box; width: calc(var(--ore-unit) * 8.485281374); height: calc(var(--ore-unit) * 8.485281374); transform: rotate(-45deg); background: var(--ore-face); border: var(--ore-radio-edge) solid var(--ore-frame); box-shadow: inset 0 0 0 var(--ore-radio-edge) var(--ore-stroke); }
+  .ore-choice[data-kind="radio"] .ore-choice__input:checked + .ore-choice__control .ore-choice__mark { display: block; position: relative; width: calc(var(--ore-unit) * 4.242640687); height: calc(var(--ore-unit) * 4.242640687); background: conic-gradient(var(--ore-radio-top) 0deg 90deg, var(--ore-radio-mid) 90deg 180deg, var(--ore-radio-bottom) 180deg 270deg, var(--ore-radio-mid) 270deg); transform: rotate(-45deg); }
+  .ore-choice[data-kind="radio"]:is([data-variant="general"], [data-variant="warning"]) { --ore-radio-top: #464646; --ore-radio-mid: #2f2f2f; --ore-radio-bottom: #1e1e1f; }
+  .ore-choice[data-kind="radio"] .ore-choice__input:focus-visible + .ore-choice__control::before { outline: var(--ore-radio-edge) solid var(--ore-focus); outline-offset: 0; }
+  .ore-choice[data-kind="radio"][data-invalid] .ore-choice__control::before { outline: var(--ore-radio-edge) solid var(--ore-destructive-background); outline-offset: 0; }
+  .ore-choice[data-kind="radio"][data-invalid] .ore-choice__control { outline: none; }
+  .ore-choice[data-kind="radio"]:active .ore-choice__input:not(:disabled) + .ore-choice__control .ore-choice__mark { width: calc(var(--ore-unit) * 3.187284); height: calc(var(--ore-unit) * 3.187284); }
+  .ore-choice[data-kind="radio"]:has(.ore-choice__input:disabled) { --ore-face: #8c8d90; --ore-stroke: #a3a4a6; --ore-radio-top: #a3a4a6; --ore-radio-mid: #8c8d90; --ore-radio-bottom: #666; }
+  .ore-choice[data-kind="radio"]:has(.ore-choice__input:disabled:checked) { --ore-face: #b1b2b5; --ore-stroke: #8c8d90; }
   /* The thumb stands above the track; keep its full travel inside a fixed hit box. */
   .ore-choice.ore-switch .ore-choice__input { width: calc(var(--ore-unit) * 22); }
   .ore-choice.ore-switch .ore-choice__input + .ore-choice__control { width: calc(var(--ore-unit) * 22); height: calc(var(--ore-unit) * 12); background: none; border: 0; box-shadow: none; }
@@ -283,7 +294,10 @@
   .ore-choice-group .ore-choice-group__description { opacity: .65; font-size: .8em; margin: 0 0 calc(var(--ore-unit) * 5); line-height: 1.7; }
   .ore-choice-group .ore-choice-group__items { display: flex; flex-direction: column; align-items: flex-start; gap: calc(var(--ore-unit) * 4); }
   .ore-choice-group[data-orientation="horizontal"] .ore-choice-group__items { flex-direction: row; flex-wrap: wrap; gap: calc(var(--ore-unit) * 10); }
-  @media (hover: hover) and (pointer: fine) { .ore-choice[data-kind="radio"]:hover .ore-choice__input:not(:disabled) + .ore-choice__control { outline: none; } .ore-choice[data-kind="radio"]:hover .ore-choice__input:not(:disabled) + .ore-choice__control::before { background: var(--ore-hover); } .ore-choice:not([data-kind="radio"]):not(.ore-switch):hover .ore-choice__input:not(:disabled) + .ore-choice__control { outline: var(--ore-unit) solid var(--ore-stroke); outline-offset: 1px; } }
+  @media (hover: hover) and (pointer: fine) {
+    .ore-choice[data-kind="checkbox"]:not(.ore-switch):hover .ore-choice__input:not(:disabled) + .ore-choice__control::before { opacity: .1; }
+    .ore-choice[data-kind="radio"]:hover .ore-choice__input:not(:disabled) + .ore-choice__control::before { background: var(--ore-hover); }
+  }
   @media (forced-colors: active) {
     .ore-choice .ore-choice__input { position: static; opacity: 1; width: auto; height: auto; appearance: auto; }
     .ore-choice .ore-choice__control { display: none; }

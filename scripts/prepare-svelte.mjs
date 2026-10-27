@@ -9,9 +9,9 @@ await cp(new URL('src/', root), staging, { recursive: true });
 for (const name of await readdir(staging)) {
   const file = new URL(name, staging);
   const source = await readFile(file, 'utf8');
-  await writeFile(file, source.replaceAll("'@ore-ui/core/motion'", "'./shared/motion.js'").replaceAll("'@ore-ui/core/choice'", "'./shared/choice.js'").replaceAll("'@ore-ui/core/select'", "'./shared/select.js'").replaceAll("'@ore-ui/core'", "'./shared/index.js'"));
+  await writeFile(file, source.replaceAll("'@ore-ui/core/motion'", "'./shared/motion.js'").replaceAll("'@ore-ui/core/choice'", "'./shared/choice.js'").replaceAll("'@ore-ui/core/tooltip'", "'./shared/tooltip.js'").replaceAll("'@ore-ui/core/select'", "'./shared/select.js'").replaceAll("'@ore-ui/core'", "'./shared/index.js'"));
 }
 await mkdir(new URL('shared/', staging), { recursive: true });
-for (const name of ['index.ts', 'motion.ts', 'select.ts', 'choice.ts']) {
+for (const name of ['index.ts', 'motion.ts', 'select.ts', 'choice.ts', 'tooltip.ts']) {
   await cp(new URL(`../packages/core/src/${name}`, import.meta.url), new URL(`shared/${name}`, staging));
 }

@@ -1,3 +1,4 @@
+import TooltipDemo from './TooltipDemo';
 import ChoiceDemo, { type ChoiceKind } from './ChoiceDemo';
 import SelectDemo from './SelectDemo';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
@@ -9,11 +10,11 @@ type Framework = 'React' | 'Svelte';
 const swatches = { colored: '#387e24', general: '#d0d1d5', destructive: '#c93636', warning: '#e1b922', realms: '#7345e5' };
 const names = { colored: 'Colored', general: 'General', destructive: 'Destructive', warning: 'Warning', realms: 'Realms' };
 const choicePages = ['radio', 'radio-group', 'checkbox', 'checkbox-group', 'switch'];
-function currentPage() { const hash = location.hash.slice(1); return choicePages.includes(hash) ? hash : hash.startsWith('select') ? 'select' : 'button'; }
+function currentPage() { const hash = location.hash.slice(1); return hash==='tooltip' ? 'tooltip' : choicePages.includes(hash) ? hash : hash.startsWith('select') ? 'select' : 'button'; }
 const figmaUrl = 'https://www.figma.com/design/XAEZlcgBRTwyL5EvAVWdV3/?node-id=425-8428';
 const navigation = [
   { title: 'GETTING STARTED', links: [{ name: 'Introduction', href: '#introduction' }, { name: 'Installation', href: '#installation' }, { name: 'Architecture', href: '#architecture' }] },
-  { title: 'COMPONENTS', links: [{ name: 'Button', href: '#button', active: true }, { name: 'Select', href: '#select', active: true }, { name: 'Radio', href: '#radio' }, { name: 'RadioGroup', href: '#radio-group' }, { name: 'Checkbox', href: '#checkbox' }, { name: 'CheckboxGroup', href: '#checkbox-group' }, { name: 'Switch', href: '#switch' }] },
+  { title: 'COMPONENTS', links: [{ name: 'Button', href: '#button', active: true }, { name: 'Select', href: '#select', active: true }, { name: 'Radio', href: '#radio' }, { name: 'RadioGroup', href: '#radio-group' }, { name: 'Checkbox', href: '#checkbox' }, { name: 'CheckboxGroup', href: '#checkbox-group' }, { name: 'Switch', href: '#switch' }, { name: 'Tooltip', href: '#tooltip' }] },
   { title: 'FOUNDATIONS', links: [{ name: 'Design tokens', href: '#tokens' }, { name: 'Motion', href: '#motion' }, { name: 'Accessibility', href: '#accessibility' }] },
 ];
 function Code({ source }: { source: string }) {
@@ -46,7 +47,7 @@ export default function App() {
   const motionCleanup = useRef<(() => void) | undefined>(undefined);
   const searchRef = useRef<HTMLInputElement>(null);
   useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; }, [dark]);
-  useEffect(() => { document.title = `${navigation[1].links.find(link => link.href === `#${page}`)?.name ?? 'Button'} · Ore UI`; if (['#select', '#button', ...choicePages.map(p => `#${p}`)].includes(location.hash)) window.scrollTo({ top: 0 }); }, [page]);
+  useEffect(() => { document.title = `${navigation[1].links.find(link => link.href === `#${page}`)?.name ?? 'Button'} · Ore UI`; if (['#tooltip', '#select', '#button', ...choicePages.map(p => `#${p}`)].includes(location.hash)) window.scrollTo({ top: 0 }); }, [page]);
   useEffect(() => { const handle = (event: KeyboardEvent) => { if ((event.metaKey || event.ctrlKey) && event.key === 'k') { event.preventDefault(); searchRef.current?.focus(); setMobileNav(true); } }; window.addEventListener('keydown', handle); return () => window.removeEventListener('keydown', handle); }, []);
   useEffect(() => () => motionCleanup.current?.(), []);
   const size = buttonSizes[sizeIndex];
@@ -72,7 +73,7 @@ export default function App() {
       {search && !navigation.some(g => g.links.some(l => l.name.toLowerCase().includes(search.toLowerCase()))) && <p className="no-results">No matching sections.</p>}
       <div className="sidebar-footer"><span className="tiny-mark"><Layers size={16} /></span><div>Built in blocks.<br/><strong>Crafted to be yours.</strong></div><span className="footer-spark">✳</span></div>
     </aside>
-    {choicePages.includes(page) ? <ChoiceDemo key={page} kind={page as ChoiceKind} framework={framework} onFrameworkChange={setFramework}/> : page === 'select' ? <SelectDemo framework={framework} onFrameworkChange={setFramework}/> : <main id="button">
+    {page === 'tooltip' ? <TooltipDemo framework={framework} onFrameworkChange={setFramework}/> : choicePages.includes(page) ? <ChoiceDemo key={page} kind={page as ChoiceKind} framework={framework} onFrameworkChange={setFramework}/> : page === 'select' ? <SelectDemo framework={framework} onFrameworkChange={setFramework}/> : <main id="button">
       <div className="breadcrumb">Components <ChevronRight size={13} /><span>Inputs</span><ChevronRight size={13} /><strong>Button</strong></div>
       <div className="hero"><div className="component-icon"><MousePointer2 size={28} strokeWidth={1.5} /></div><div className="hero-title"><h1>Button</h1><span className="status-badge"><span/>Minecraft Ore UI</span></div><p>Built in blocks. Made for the web.<br className="mobile-break"/> The tactile Minecraft Ore UI button, in React and Svelte.</p><div className="hero-meta"><span><Box size={13} /> @ore-ui/{framework.toLowerCase()}</span><span className="meta-divider"/><span><Accessibility size={14}/> Accessible by default</span></div></div>
       <div className="page-tabs" role="tablist" aria-label="Button documentation">{['Overview', 'Styles', 'API'].map(item => <button key={item} role="tab" tabIndex={tab === item ? 0 : -1} onKeyDown={event => {

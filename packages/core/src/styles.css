@@ -304,3 +304,26 @@
     .ore-choice:has(.ore-choice__input:focus-visible) { outline: var(--ore-unit) solid Highlight; }
   }
 }
+
+@layer ore.components {
+  .ore-tooltip__positioner { --z-index: 1000; z-index: 1000; }
+  .ore-tooltip { position: relative; z-index: 1000; box-sizing: border-box; width: 420px; max-width: calc(100vw - 36px); min-width: 80px; border: 9px solid transparent; border-image: url('./icons/tooltip-bubble.svg') 12 fill stretch; padding: 0 3px; color: #fff; font-family: var(--ore-font); font-size: 14px; font-weight: 400; line-height: 20px; text-align: start; }
+  .ore-tooltip__body { display: flex; align-items: flex-start; gap: 8px; max-height: min(360px, calc(100vh - 60px)); overflow: auto; }
+  .ore-tooltip__text { min-width: 0; flex: 1; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .ore-tooltip__info { flex: none; display: block; width: 18px; height: 20px; background: currentColor; mask: url('./icons/tooltip-info.svg') center / contain no-repeat; }
+  .ore-tooltip button.ore-tooltip__close { flex: none; display: grid; place-items: center; width: 24px; height: 24px; margin: -2px -2px -2px 4px; padding: 0; border: 0; background: transparent; color: #fff; font: inherit; cursor: pointer; }
+  .ore-tooltip__close-icon { display: block; width: 12px; height: 12px; background: currentColor; mask: url('./icons/tooltip-close.svg') center / contain no-repeat; font-size: 0; }
+  .ore-tooltip button.ore-tooltip__close:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+  .ore-tooltip__arrow { --arrow-size: 24px; z-index: 1001; pointer-events: none; }
+  .ore-tooltip__arrow-tip { display: block; width: 24px; height: 24px; background: url('./icons/tooltip-tail.svg') center top / 24px 21px no-repeat; }
+  .ore-tooltip__positioner[data-side="top"] .ore-tooltip__arrow-tip { transform: translateY(9px); }
+  .ore-tooltip__positioner[data-side="top"]:is([data-tail-align="start"], [data-tail-direction="start"]) .ore-tooltip__arrow-tip { transform: translateY(9px) scaleX(-1); }
+  .ore-tooltip__positioner[data-side="bottom"] .ore-tooltip__arrow-tip { transform: translateY(-9px) scaleY(-1); }
+  .ore-tooltip__positioner[data-side="bottom"]:is([data-tail-align="start"], [data-tail-direction="start"]) .ore-tooltip__arrow-tip { transform: translateY(-9px) scale(-1); }
+  .ore-tooltip__positioner[data-side="left"] .ore-tooltip__arrow-tip { transform: translateX(9px) rotate(-90deg); }
+  .ore-tooltip__positioner[data-side="right"] .ore-tooltip__arrow-tip { transform: translateX(-9px) rotate(90deg); }
+  .ore-tooltip__positioner[data-side="left"]:is([data-tail-align="start"], [data-tail-direction="start"]) .ore-tooltip__arrow-tip { transform: translateX(9px) rotate(-90deg) scaleX(-1); }
+  .ore-tooltip__positioner[data-side="right"]:is([data-tail-align="start"], [data-tail-direction="start"]) .ore-tooltip__arrow-tip { transform: translateX(-9px) rotate(90deg) scaleX(-1); }
+  @media (hover: hover) and (pointer: fine) { .ore-tooltip button.ore-tooltip__close:hover { background: #0002; } }
+  @media (forced-colors: active) { .ore-tooltip { border: 2px solid CanvasText; border-image: none; background: Canvas; color: CanvasText; padding: 8px; } .ore-tooltip__arrow { display: none; } .ore-tooltip button.ore-tooltip__close { color: CanvasText; } }
+}

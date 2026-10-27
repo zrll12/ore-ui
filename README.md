@@ -175,3 +175,17 @@ import { Switch } from '@ore-ui/react';
 ```
 
 The demo is available at `/#switch`. The track and elevated thumb follow the supplied Switch screenshot, including the thumb-only focus ring, neutral disabled states, and `withIcons` 1/0 marks (enabled by default). Both track halves and their labels remain fixed while the outlined, bottom-shadowed thumb moves over them. Thumb travel uses an interruptible 160ms transform transition; reduced-motion preferences disable the travel animation. Styling and form behavior reuse the shared choice foundation.
+
+### Tooltip
+
+Available from both public packages. React wraps one focusable child; Svelte renders a `children({ triggerProps })` snippet. Supports keyboard focus, Escape dismissal, hover delays, hoverable text, controlled/bound open state, twelve placements, optional arrows, and portal positioning with viewport fallbacks. Content is plain text.
+
+```tsx
+<Tooltip content="Keep your inventory after respawning.">
+  <Button>Keep inventory</Button>
+</Tooltip>
+```
+
+See `/#tooltip` in the demo and [Tooltip design and usage](docs/tooltip-design.md) for the Svelte snippet and accessibility contract.
+
+Tooltip supports `placement="auto"` and `tailAlign="auto"` in both frameworks. They recompute while open as the viewport, trigger, content, or surrounding layout changes. Tail alignment controls only the forward/backward staircase direction, never the arrow anchor. Explicit placement and tail direction remain available.

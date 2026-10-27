@@ -34,3 +34,7 @@ Also exports `Radio`, `RadioGroup`, `Checkbox`, and `CheckboxGroup`. Singles exp
 Svelte supports `bind:checked`, `bind:value`, and `bind:ref`.
 
 `Switch` / `SwitchProps` provides a native two-state switch with checked/defaultChecked, onCheckedChange, native form attributes, and an input ref. Svelte also supports bind:checked and bind:ref. It uses the shared stylesheet, supports `withIcons` 1/0 marks (enabled by default), and does not support indeterminate state. Thumb travel animates for 160ms and respects reduced-motion preferences.
+
+`Tooltip` / `TooltipProps` exposes a `children({ triggerProps })` snippet; spread triggerProps onto the native trigger or Ore Button. It supports `bind:open`, `defaultOpen`, delays, placement, optional arrow, and plain-text content. Use Tooltip's `triggerId` / `aria-describedby` for existing identity/help, and set Tooltip `disabled` when the trigger is disabled. Import the shared stylesheet.
+
+Tooltip supports `placement="auto"` and `tailAlign="auto"` in both frameworks. They recompute while open as the viewport, trigger, content, or surrounding layout changes. Tail alignment controls only the forward/backward staircase direction, never the arrow anchor. Explicit placement and tail direction remain available.

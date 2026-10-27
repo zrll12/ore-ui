@@ -32,3 +32,7 @@ Also exports `Radio`, `RadioGroup`, `Checkbox`, and `CheckboxGroup`. Singles exp
 React supports controlled and uncontrolled state; refs target native inputs or group fieldsets.
 
 `Switch` / `SwitchProps` provides a native two-state switch with checked/defaultChecked, onCheckedChange, native form attributes, and an input ref. Svelte also supports bind:checked and bind:ref. It uses the shared stylesheet, supports `withIcons` 1/0 marks (enabled by default), and does not support indeterminate state. Thumb travel animates for 160ms and respects reduced-motion preferences.
+
+`Tooltip` / `TooltipProps` wraps one focusable child: `<Tooltip content="Hint"><Button>Inspect</Button></Tooltip>`. Child refs, native handlers and description ids are preserved. Configure `placement`, `openDelay`, `closeDelay`, `offset`, `withArrow`, and `open` / `onOpenChange` or `defaultOpen`. Content is plain text; import the shared stylesheet. Custom trigger components must forward native props.
+
+Tooltip supports `placement="auto"` and `tailAlign="auto"` in both frameworks. They recompute while open as the viewport, trigger, content, or surrounding layout changes. Tail alignment controls only the forward/backward staircase direction, never the arrow anchor. Explicit placement and tail direction remain available.

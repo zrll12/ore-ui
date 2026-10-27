@@ -2,7 +2,7 @@
 
 ## Minecraft — Ore UI Style
 
-Button, Radio, and Checkbox appearance and palette values adapted from “Minecraft - Ore UI Style” by Miljö AB and Turóczi Ádám.
+Button, Radio, Checkbox, and Tooltip appearance and palette values adapted from “Minecraft - Ore UI Style” by Miljö AB and Turóczi Ádám.
 
 - Community source: https://www.figma.com/community/file/1675191037788105821/minecraft-ore-ui-style
 - Design reference: https://www.figma.com/design/XAEZlcgBRTwyL5EvAVWdV3/?node-id=425-8428
@@ -12,6 +12,8 @@ Button, Radio, and Checkbox appearance and palette values adapted from “Minecr
 The demo icon in `apps/docs/public/icons/ore-button.svg` is the original 32 × 32 icon exported from component 2045:2216, unchanged. Its scaled wrapper preserves the source geometry.
 
 The Checkbox check and minus vector paths in `dist/icons/choice-check.svg` and `dist/icons/choice-minus.svg` are retained from the user-exported community design SVG. CSS masks apply framework-independent semantic colors, and the controls scale the source geometry.
+
+The blue Tooltip bubble frame, staircase tail, info glyph, and close glyph in `dist/icons/tooltip-*.svg` retain the exported design paths. The frame uses a stretchable SVG border image; the tail is mirrored/rotated for placement, and the glyphs use CSS masks.
 
 ## Minecraft Seven v2
 

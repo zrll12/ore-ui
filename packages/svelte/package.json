@@ -33,8 +33,10 @@
     "svelte": "^5.20.0"
   },
   "dependencies": {
+    "@floating-ui/dom": "1.8.0",
     "@zag-js/select": "^1.46.0",
     "@zag-js/svelte": "^1.46.0",
+    "@zag-js/tooltip": "1.46.0",
     "motion": "^12.23.24"
   },
   "devDependencies": {

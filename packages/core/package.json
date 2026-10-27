@@ -8,10 +8,13 @@
     "./motion": "./src/motion.ts",
     "./styles.css": "./src/styles.css",
     "./select": "./src/select.ts",
-    "./choice": "./src/choice.ts"
+    "./choice": "./src/choice.ts",
+    "./tooltip": "./src/tooltip.ts"
   },
   "dependencies": {
+    "@floating-ui/dom": "1.8.0",
     "@zag-js/select": "^1.46.0",
+    "@zag-js/tooltip": "1.46.0",
     "motion": "^12.23.24"
   }
 }

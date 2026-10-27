@@ -75,8 +75,14 @@ importers:
 
   packages/core:
     dependencies:
+      '@floating-ui/dom':
+        specifier: 1.8.0
+        version: 1.8.0
       '@zag-js/select':
         specifier: ^1.46.0
+        version: 1.46.0
+      '@zag-js/tooltip':
+        specifier: 1.46.0
         version: 1.46.0
       motion:
         specifier: ^12.23.24
@@ -84,11 +90,17 @@ importers:
 
   packages/react:
     dependencies:
+      '@floating-ui/dom':
+        specifier: 1.8.0
+        version: 1.8.0
       '@zag-js/react':
         specifier: ^1.46.0
         version: 1.46.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@zag-js/select':
         specifier: ^1.46.0
+        version: 1.46.0
+      '@zag-js/tooltip':
+        specifier: 1.46.0
         version: 1.46.0
       motion:
         specifier: ^12.23.24
@@ -103,12 +115,18 @@ importers:
 
   packages/svelte:
     dependencies:
+      '@floating-ui/dom':
+        specifier: 1.8.0
+        version: 1.8.0
       '@zag-js/select':
         specifier: ^1.46.0
         version: 1.46.0
       '@zag-js/svelte':
         specifier: ^1.46.0
         version: 1.46.0(svelte@5.57.2)
+      '@zag-js/tooltip':
+        specifier: 1.46.0
+        version: 1.46.0
       motion:
         specifier: ^12.23.24
         version: 12.43.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -903,6 +921,9 @@ packages:
     resolution: {integrity: sha512-m4AQc0WZYGafvkwccyU2mhxAqlKU+3V9yHsC0C2BdEWt34Y7CsUB9gcOsfR25jKM2R6QRGFP6hfIPpa6kSnAiw==}
     peerDependencies:
       svelte: '>=5'
+
+  '@zag-js/tooltip@1.46.0':
+    resolution: {integrity: sha512-H0Ov0bDW8thYqRO/VI5RW4vVc/qOW8S8du9uI5mSisyyY25GiG5N2iuOiM0kaYXBo1wUTvMJFsBdfMwhi4z9oA==}
 
   '@zag-js/types@1.46.0':
     resolution: {integrity: sha512-HwIvuXCGx/wgCNNXYvKyCJ62e/QmIi02v9GsA0icFxDKxv6i7J2mZmAQ/vF5Nmh3q80Nj5CZ1DdQ7bXYt/Yzww==}
@@ -2333,6 +2354,16 @@ snapshots:
       '@zag-js/types': 1.46.0
       '@zag-js/utils': 1.46.0
       svelte: 5.57.2
+
+  '@zag-js/tooltip@1.46.0':
+    dependencies:
+      '@zag-js/anatomy': 1.46.0
+      '@zag-js/core': 1.46.0
+      '@zag-js/dom-query': 1.46.0
+      '@zag-js/focus-visible': 1.46.0
+      '@zag-js/popper': 1.46.0
+      '@zag-js/types': 1.46.0
+      '@zag-js/utils': 1.46.0
 
   '@zag-js/types@1.46.0':
     dependencies:
